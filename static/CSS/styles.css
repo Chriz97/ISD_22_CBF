@@ -1,0 +1,76 @@
+button {
+     font-family: tahoma;
+     margin-top: 1px;
+     margin-right: 100px;
+     position:absolute;
+     top:0;
+     right:0;
+}
+
+
+text {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 1.1rem;
+}
+
+body {
+  font-family: Arial, Verdana, sans-serif;
+  background-color: white;
+}
+
+marquee {
+    color: orangered;
+    background-color: black;
+}
+
+table {
+    width: 80%;
+}
+
+th, td {
+    padding: 7px 7px 7px 7px;
+}
+
+th {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 70%;
+    border-bottom: 2px solid #111111;
+    border-top: 1px solid #999;
+    text-align: left;
+}
+
+tr.even {
+    background-color: #efefef;
+}
+tr:hover{
+    background-color: #c3e6e5;
+}
+
+
+header {
+  font-size: 1.5cm;
+  font-family: "Lucinda Grande", "Lucinda Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
+  color: darkblue;
+  text-align: center;
+}
+
+img {
+  width: 800px;
+  height: 400px;
+}
+
+h1 {
+  font-size: 1.2cm;
+  color: blue;
+  text-align: center
+;
+}
+p {
+  color: red;
+}
+
+box{
+  width: 100%;
+  text-align:center;
+}

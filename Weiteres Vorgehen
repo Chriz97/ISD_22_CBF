@@ -1,0 +1,50 @@
+Meine To do:
+
+Quarterly Stock Prices, Dow Jones 30 Companies
+
+
+NASDAQ Api: Key = XnmjxoMhHUvExa5su2JJ
+
+Skalierung, Automatisierung:
+
+
+Präsentation:
+Front Seite, 1-2 Seiten vorstellen
+
+
+Navigation Bar:
+    HTML and CSS combination
+
+# Net income quarterly
+
+März 2005 1 Euro
+März 2006 1.05 Euro
+
+Share repurchase
+
+API keys:
+
+
+#####
+CAPE, Cyclically adjusted price-to-earnings ratio
+
+Annahmen an das Modell:
+    Marktanteil gleich bleibt: valides Modell
+
+Risk free rate
+
+Webseite:
+Home Page:
+Ermittlung Shiller KGV der 30 Dow Jones Unternehmen, Berechnungsweise, (Navigation Bar)
+
+Einzelnes Unternehmen:
+Aktuelle Aktienpreis, Informationen zum Unternehmen laut API,
+
+
+Kennzahlen:
+    #Gewinn im Verhältnis (inflation adjusted) zur Marktkapitalisierung (inflation adjusted):
+        Wenn das konstant bleibt, bleibt auch die Marktmacht gleich
+
+
+Unique:
+    Value Model

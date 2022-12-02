@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IBM</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<header class="Head">
+<h1>International Business Machines Corporation (IBM)</h1>
+</header>
+<body>
+{% block content %}
+    <text>Stock price, close yesterday </text> <text> {{ data }} </text>
+{% endblock content %}
+<div></div>
+</body>
+</html>
