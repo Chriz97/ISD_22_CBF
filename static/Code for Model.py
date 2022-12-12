@@ -49,7 +49,7 @@ for i in range(66, 106):
 listen=[]
 for i in range(len(df2)):
     for j in range(len(df1)):
-        if df2["Unnamed: 0"][i][:7]==df1["Unnamed: 0"][j][:7]:
+        if df2["Unnamed: 0"][i][:7] == df1["Unnamed: 0"][j][:7]:
             listen.append(df2["IBM"][i]/df1["CPI"][j]*199.8)
 
 
