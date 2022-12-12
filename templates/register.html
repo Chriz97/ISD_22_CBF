@@ -5,20 +5,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Register</title>
 </head>
 
 <body>
-    <h1>Login Page</h1>
+    <h1>Register Page</h1>
 
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         {{ form.username }}
         {{ form.password }}
+        {{ form.date_of_birth}}
         {{ form.submit }}
     </form>
 
-    <a href="{{ url_for('register') }}">Don't have an account? Sign Up</a>
+    <a href="{{ url_for('login') }}">Already have an account? Log In</a>
 </body>
 
 </html>
