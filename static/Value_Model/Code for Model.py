@@ -61,8 +61,9 @@ for i in listen:
     Shiller_KGVs.append(i/x)
 
 Shiller_KGVs.reverse()
-avg_Shiller=[(sum(Shiller_KGVs)/len(Shiller_KGVs))]
+avg_Shiller = [(sum(Shiller_KGVs)/len(Shiller_KGVs))]
 
+print(Shiller_KGVs)
 
 plt.plot(Shiller_KGVs)
 plt.axhline(y = avg_Shiller, color = 'r', linestyle = '-')

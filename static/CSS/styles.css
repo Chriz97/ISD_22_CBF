@@ -1,10 +1,10 @@
-button {
-     font-family: tahoma;
-     margin-top: 1px;
-     margin-right: 100px;
-     position:absolute;
-     top:0;
-     right:0;
+
+.wrapper {
+   float:right;
+   position: absolute;
+   top: 1px;
+   right: 0px;
+   margin-right:0px;
 }
 
 

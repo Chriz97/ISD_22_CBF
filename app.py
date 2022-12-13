@@ -8,13 +8,12 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
 from flask_bcrypt import Bcrypt
 
+
 app = Flask(__name__, static_url_path='/static')
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
 app.config['SECRET_KEY'] = 'thisisasecretkey'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
-
-
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -45,7 +44,7 @@ class RegisterForm(FlaskForm):
 
     date_of_birth = StringField(validators=[InputRequired()], render_kw={"placeholder": "Date of birth"})
 
-    submit = SubmitField('Register')
+    submit = SubmitField('Sign up now')
 
     def validate_username(self, username):
         existing_user_username = User.query.filter_by(
@@ -72,7 +71,7 @@ def login():
         if user:
             if bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user)
-                return redirect(url_for('dashboard'))
+                return redirect(url_for('hello_world'))
     return render_template('login.html', form=form)
 
 
@@ -98,7 +97,7 @@ def register():
         new_user = User(username=form.username.data, password=hashed_password)
         db.session.add(new_user)
         db.session.commit()
-        return redirect(url_for('login'))
+        return redirect(url_for('hello_world'))
 
     return render_template('register.html', form=form)
 
@@ -109,6 +108,7 @@ def hello_world():  # put application's code here
 
 @app.route("/MMM", methods=["GET"])
 def MMM():
+
     return render_template("3M.html")
 
 @app.route("/AXP", methods=["GET"])
