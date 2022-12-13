@@ -15,16 +15,21 @@
 </header>
 <body>
 {% block content %}
-    <div class="columns">
-   <div class="column">
-           <text>Stock price, close yesterday </text> <text> {{ data }} </text>
-     ///  Column 1: Put any relevant content here   ///
-</div>
-<div class="column">
-     ///  Column 2: Put any relevant content here  ///
-</div>
-</div>
+    <table>
+    <tr>
+    <th>Stock price, close yesterday:   {{ data }}</th>
+    <th>Volume</th>
+    </tr>
+    <tr>
+    <td>Beta</td>
+    <td>Shares Outstanding</td>
+    <td>Found</td>
+    <td>Market Capitalization</td>
+  </tr>
+    </table>
+
 {% endblock content %}
+
 <div id="matplotlib-lineplot"></div>
 <py-script output="matplotlib-lineplot">
     import matplotlib.pyplot as plt

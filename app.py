@@ -8,6 +8,7 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
 from flask_bcrypt import Bcrypt
 
+# Initialization of the Flask App and Setting up the Database for the registration Form as well as Bcrypt to encrypt Passwords
 
 app = Flask(__name__, static_url_path='/static')
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
@@ -19,6 +20,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
+# Creating the Entity and the Attributes of the Database Schema
 
 @app.before_first_request
 def create_tables():
@@ -27,32 +29,45 @@ def create_tables():
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+# SQL-Code: Creation of the Database, Username, Password, Name, Email and Date of birth are required for the sign up process
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    username = db.Column(db.String(20), nullable=True, unique=True)
+    first_name = db.Column(db.String(50), nullable=True)
+    last_name = db.Column(db.String(50), nullable=True)
+    username = db.Column(db.String(10), nullable=True, unique=True) # 10 Characters max for username
     password = db.Column(db.String(80), nullable=True)
+    email = db.Column(db.String(100), nullable=True, unique=True)
     date_of_birth = db.Column(db.Date, nullable=True)
 
+# Registration Form: First Name, Last Name, Username, Password, Email, Date of birth + Validators and Render_KW
 
 class RegisterForm(FlaskForm):
+
+    first_name = StringField(validators=[InputRequired(), Length(min=3, max=50)], render_kw={"placeholder": "First Name"})
+
+    last_name = StringField(validators=[InputRequired(), Length(min=3, max=50)], render_kw={"placeholder": "Last Name"})
+
     username = StringField(validators=[
-                           InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
+                           InputRequired(message="Choose a unique username, at least 4 Characters are required"), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
 
     password = PasswordField(validators=[
-                             InputRequired(), Length(min=8, max=20)], render_kw={"placeholder": "Password"})
+                             InputRequired(), Length(min=8, max=20)], render_kw={"placeholder": "New Password"})
+
+    email = StringField(validators=[InputRequired()], render_kw={"placeholder": "Email"})
 
     date_of_birth = StringField(validators=[InputRequired()], render_kw={"placeholder": "Date of birth"})
 
     submit = SubmitField('Sign up now')
 
+# Validate whether a Username is already in use or unique
     def validate_username(self, username):
         existing_user_username = User.query.filter_by(
             username=username.data).first()
         if existing_user_username:
-            raise ValidationError(
-                'That username already exists. Please choose a different one.')
+            raise ValidationError("That username is not unique. Please choose a different one.")
 
+# Login Form Username and Password with Validators
 
 class LoginForm(FlaskForm):
     username = StringField(validators=[
@@ -62,6 +77,8 @@ class LoginForm(FlaskForm):
                              InputRequired(), Length(min=8, max=20)], render_kw={"placeholder": "Password"})
 
     submit = SubmitField('Login')
+
+# Validate Login and Redirect the User the Homepage
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -74,18 +91,13 @@ def login():
                 return redirect(url_for('hello_world'))
     return render_template('login.html', form=form)
 
-
-@app.route('/dashboard', methods=['GET', 'POST'])
-@login_required
-def dashboard():
-    return render_template('dashboard.html')
-
+# This will be used for the Paywall of the
 
 @app.route('/logout', methods=['GET', 'POST'])
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('login'))
+    return redirect(url_for('hello_world'))
 
 
 @ app.route('/register', methods=['GET', 'POST'])
@@ -101,17 +113,21 @@ def register():
 
     return render_template('register.html', form=form)
 
-
+# Code to return the main homepage
 @app.route('/', methods=["GET"])
 def hello_world():  # put application's code here
     return render_template("main.html")
 
+# The following lines of Code are used to direct users to the 30 Dow Jones Companies
+
 @app.route("/MMM", methods=["GET"])
 def MMM():
-
     return render_template("3M.html")
 
+
+
 @app.route("/AXP", methods=["GET"])
+@login_required
 def AXP():
     return render_template("American Express.html")
 

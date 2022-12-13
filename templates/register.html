@@ -5,23 +5,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/Registration_Form.css') }}">
     <title>Sign up for Cross Border Finance</title>
 </head>
 
 <body>
-    <h1>Create an account today</h1>
+    <h1>Create a new account</h1>
     <h2>It is simple and free</h2>
 
-    <form method="POST" action=""
+    <form method="POST" action="">
         <div class=login-box>
         {{ form.hidden_tag() }}
+        {{ form.first_name }}
+        {{ form.last_name }}
         {{form.username }}
+        {{ form.email }}
         {{ form.password }}
         {{ form.date_of_birth}}
         {{ form.submit }}
         </div>
     </form>
-
     <a href="{{ url_for('login') }}">Already have an account?</a>
 </body>
 

@@ -11,7 +11,11 @@ Cross Border Finance
 
 <body>
 <div class="wrapper">
+    {% if current_user.is_authenticated %}
+    <button onclick=location.href="{{ url_for('logout') }}" type="button">Logout</button>
+{% else %}
     <button onclick=location.href="{{ url_for('login') }}" type="button">Login</button>
+{% endif %}
     <button onclick=location.href="{{ url_for('register') }}" type="button">Register</button>
     </div>
     <div></div>
