@@ -4,11 +4,17 @@ body {
 }
 
 h1 {
-  font-size: 1.2cm;
+  font-size: 1.8cm;
   color: blue;
-  text-align: center;
+  position: relative;
+  left: 10px;
 }
 
 table {
     width: 80%;
+}
+
+.navbar-brand-center {
+  margin-left: auto;
+  margin-right: auto;
 }

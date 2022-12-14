@@ -54,17 +54,19 @@ header {
   color: darkblue;
   text-align: center;
 }
+.navbar-brand-center {
+  margin-left: auto;
+  margin-right: auto;
+}
 
 img {
   width: 800px;
   height: 400px;
 }
-
-h1 {
-  font-size: 1.2cm;
-  color: blue;
-  text-align: center
-;
+.btn-primary{
+    position: relative;
+     top:15px;
+     right:3px;
 }
 p {
   color: red;

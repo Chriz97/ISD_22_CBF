@@ -184,6 +184,10 @@ def IBM():
 def JNJ():
     return render_template("Johnson and Johnson.html")
 
+@app.route("/JPM", methods=["GET"])
+def JPM():
+    return render_template("JPMorgan Chase.html")
+
 @app.route("/MCD", methods=["GET"])
 def MCD():
     return render_template("McDonalds.html")

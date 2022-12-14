@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <title>IBM</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles_STOCKS.css') }}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </head>
-<header class="Head">
-<h1>International Business Machines Corporation (IBM)</h1>
+<header>
 <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
 <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
     <py-env>
@@ -14,6 +15,10 @@
     </py-env>
 </header>
 <body>
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+  <a class="navbar-brand-center" style="font-size: 40px;">International Business Machines Corporation (IBM)</a>
+</nav>
+<br>
 {% block content %}
     <table>
     <tr>
@@ -44,7 +49,8 @@
     </table>
 
 {% endblock content %}
-
+<br>
+<h1>Value Model</h1>
 <div id="matplotlib-lineplot"></div>
 <py-script output="matplotlib-lineplot">
     import matplotlib.pyplot as plt
