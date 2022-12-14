@@ -3,6 +3,8 @@
 <head>
     <title>Dow Jones 30</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </head>
 
 <header>
@@ -12,14 +14,14 @@ Cross Border Finance
 <body>
 <div class="wrapper">
     {% if current_user.is_authenticated %}
-    <button onclick=location.href="{{ url_for('logout') }}" type="button">Logout</button>
+    <button onclick=location.href="{{ url_for('logout') }}" type="button", class="btn btn-primary">Logout</button>
 {% else %}
-    <button onclick=location.href="{{ url_for('login') }}" type="button">Login</button>
+    <button onclick=location.href="{{ url_for('login') }}" type="button", class="btn btn-primary">Login</button>
 {% endif %}
-    <button onclick=location.href="{{ url_for('register') }}" type="button">Register</button>
+    <button onclick=location.href="{{ url_for('register') }}" type="button", class="btn btn-primary">Sign-up</button>
     </div>
     <div></div>
-    <marquee behavior="scroll" width="100%" direction="left" height="20px" scrollamount="14">
+    <marquee behavior="scroll" width="100%" direction="left" height="20px" scrollamount="5">
         AXP | AMGN | AAPL | BA | CAT | CSCO | CVS | GS | HD | HON | IBM | INTC | JNJ | KO | JPM | MCD | MMM | MRK | MSFT | NIKE | PG | TRV | UNH | CRM | VZ | V | WBA | WMT | DIS | DOW
     </marquee>
     </marquee>

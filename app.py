@@ -1,10 +1,10 @@
 import requests
 import json
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, EmailField
 from wtforms.validators import InputRequired, Length, ValidationError
 from flask_bcrypt import Bcrypt
 
@@ -21,8 +21,7 @@ login_manager.init_app(app)
 login_manager.login_view = 'login'
 
 # Creating the Entity and the Attributes of the Database Schema
-
-@app.before_first_request
+@app.before_first_request # Not an error: Decorator is no usable after Flask Version 2.3.
 def create_tables():
      db.create_all()
 @login_manager.user_loader
@@ -33,12 +32,11 @@ def load_user(user_id):
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    first_name = db.Column(db.String(50), nullable=True)
-    last_name = db.Column(db.String(50), nullable=True)
+    first_name = db.Column(db.String(20))
+    last_name = db.Column(db.String(20))
     username = db.Column(db.String(10), nullable=True, unique=True) # 10 Characters max for username
     password = db.Column(db.String(80), nullable=True)
-    email = db.Column(db.String(100), nullable=True, unique=True)
-    date_of_birth = db.Column(db.Date, nullable=True)
+    email = db.Column(db.String(50), nullable=True, unique=True)
 
 # Registration Form: First Name, Last Name, Username, Password, Email, Date of birth + Validators and Render_KW
 
@@ -48,15 +46,11 @@ class RegisterForm(FlaskForm):
 
     last_name = StringField(validators=[InputRequired(), Length(min=3, max=50)], render_kw={"placeholder": "Last Name"})
 
-    username = StringField(validators=[
-                           InputRequired(message="Choose a unique username, at least 4 Characters are required"), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
+    username = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
 
-    password = PasswordField(validators=[
-                             InputRequired(), Length(min=8, max=20)], render_kw={"placeholder": "New Password"})
+    password = PasswordField(validators=[InputRequired(), Length(min=8, max=20)], render_kw={"placeholder": "New Password"})
 
-    email = StringField(validators=[InputRequired()], render_kw={"placeholder": "Email"})
-
-    date_of_birth = StringField(validators=[InputRequired()], render_kw={"placeholder": "Date of birth"})
+    email = EmailField(validators=[InputRequired()], render_kw={"placeholder": "Email"})
 
     submit = SubmitField('Sign up now')
 
@@ -91,7 +85,7 @@ def login():
                 return redirect(url_for('hello_world'))
     return render_template('login.html', form=form)
 
-# This will be used for the Paywall of the
+# This will be used for the Paywall of the Website, Login Required for all Websites
 
 @app.route('/logout', methods=['GET', 'POST'])
 @login_required
@@ -106,7 +100,7 @@ def register():
 
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data)
-        new_user = User(username=form.username.data, password=hashed_password)
+        new_user = User(first_name=form.first_name.data, last_name=form.last_name.data,username=form.username.data, password=hashed_password, email=form.email.data)
         db.session.add(new_user)
         db.session.commit()
         return redirect(url_for('hello_world'))
@@ -123,8 +117,6 @@ def hello_world():  # put application's code here
 @app.route("/MMM", methods=["GET"])
 def MMM():
     return render_template("3M.html")
-
-
 
 @app.route("/AXP", methods=["GET"])
 @login_required
@@ -243,6 +235,8 @@ def WMT():
 @app.route("/DIS", methods=["GET"])
 def DIS():
     return render_template("Walt Disney.html")
+
+# Initialize the Flask APP with app.run
 
 if __name__ == '__main__':
     app.run()
