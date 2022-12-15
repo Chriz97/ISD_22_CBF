@@ -2,9 +2,69 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <title>Honeywell</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles_STOCKS.css') }}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+</head>
+<header>
+<link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+<script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    <py-env>
+    - matplotlib
+    </py-env>
+</header>
+<body>
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+  <a class="navbar-brand-center" style="font-size: 40px;">Honeywell</a>
+</nav>
+<br>
+{% block content %}
+    <table class="table table-striped table-hover">
+    <tr>
+    <td>Stock price, close yesterday:   </td>
+    <td>Official Name: {{data_indicators_HON[4]}}</td>
+    </tr>
+    <tr>
+    <td>52 Week High: {{ "{:0,.2f}".format(data_indicators_HON[5])}}</td>
+    <td>Market Capitalization: {{ "{:0,d}".format(data_indicators_HON[12])}}</td>
+    </tr>
+    <tr>
+    <td>52 Week Low: {{ "{:0,.2f}".format(data_indicators_HON[6])}}</td>
+    <td>Year Incorporated: {{data_indicators_HON[14]}}</td>
+    </tr>
+    <tr>
+    <td>Beta: {{data_indicators_HON[1]}}</td>
+    <td>Headquarters: {{data_indicators_HON[11]}}</td>
+    </tr>
+    <tr>
+    <td>Average Volume: {{ "{:0,d}".format(data_indicators_HON[8])}}</td>
+    <td>Industry: {{data_indicators_HON[10]}}</td>
+    </tr>
+    <tr>
+    <td>Shares Outstanding: {{ "{:0,d}".format(data_indicators_HON[9])}}</td>
+    <td>Primary Exchange: {{data_indicators_HON[3]}}</td>
+    </tr>
+    <tr>
+    <td>1 Year Price Target: {{ "{:0,.2f}".format(data_indicators_HON[13])}}</td>
+    <td>Employees: {{ "{:0,d}".format(data_indicators_HON[2])}}</td>
+    </tr>
+    </table>
+
+{% endblock content %}
+<br>
+<h1>Value Model</h1>
+<div id="matplotlib-lineplot" style="horiz-align: center;"></div>
+<py-script output="matplotlib-lineplot">
+    import matplotlib.pyplot as plt
+    fig, ax = plt.subplots()
+    Shiller_KGVs = [4.511768010962432, 5.640196217496208, 6.822344795716345, 6.125263042143806, 8.035439477897881, 9.39129295596785, 9.259391681969461, 9.147168138454932, 10.060021906936274, 11.174790281416103, 16.09924874615331, 15.343035970223266, 22.21408144362184, 20.649684695072217, 18.33139444643146, 18.18682848506845, 18.15391326485869, 18.501856265780063, 13.954734499711483, 15.593230448567205, 18.13386840220621, 14.695034909868248, 19.55528269905499, 16.61594041602589, 11.432366692260409, 9.203328106590146, 12.238761382722057, 12.162376859134152, 12.828779664630975, 13.624336193963236, 14.364296301222257, 13.999009924462486, 13.290108566846493, 12.898144021684065, 14.79775888090255, 13.503649861278967, 10.897104409634972, 11.526409707290023, 11.930761613678735, 11.895316835521347]
+    avg_Shiller = [(sum(Shiller_KGVs)/len(Shiller_KGVs))]
+    plt.plot(Shiller_KGVs)
+    plt.axhline(y = avg_Shiller, color = 'r', linestyle = '-')
+    plt.ylabel("Share Price")
+    fig
+    </py-script>
+<div></div>
 </body>
 </html>

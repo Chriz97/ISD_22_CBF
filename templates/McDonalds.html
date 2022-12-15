@@ -2,15 +2,59 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
-    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    <title>McDonald's</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles_STOCKS.css') }}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<header>
+<link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+<script defer src="https://pyscript.net/alpha/pyscript.js"></script>
     <py-env>
     - matplotlib
     </py-env>
-</head>
+</header>
 <body>
-<div id="matplotlib-lineplot"></div>
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+  <a class="navbar-brand-center" style="font-size: 40px;">McDonald's</a>
+</nav>
+<br>
+{% block content %}
+    <table class="table table-striped table-hover">
+    <tr>
+    <td>Stock price, close yesterday:   </td>
+    <td>Official Name: {{data_indicators_MCD[4]}}</td>
+    </tr>
+    <tr>
+    <td>52 Week High: {{ "{:0,.2f}".format(data_indicators_MCD[5])}}</td>
+    <td>Market Capitalization: {{ "{:0,d}".format(data_indicators_MCD[12])}}</td>
+    </tr>
+    <tr>
+    <td>52 Week Low: {{ "{:0,.2f}".format(data_indicators_MCD[6])}}</td>
+    <td>Year Incorporated: {{data_indicators_MCD[14]}}</td>
+    </tr>
+    <tr>
+    <td>Beta: {{data_indicators_MCD[1]}}</td>
+    <td>Headquarters: {{data_indicators_MCD[11]}}</td>
+    </tr>
+    <tr>
+    <td>Average Volume: {{ "{:0,d}".format(data_indicators_MCD[8])}}</td>
+    <td>Industry: {{data_indicators_MCD[10]}}</td>
+    </tr>
+    <tr>
+    <td>Shares Outstanding: {{ "{:0,d}".format(data_indicators_MCD[9])}}</td>
+    <td>Primary Exchange: {{data_indicators_MCD[3]}}</td>
+    </tr>
+    <tr>
+    <td>1 Year Price Target: {{ "{:0,.2f}".format(data_indicators_MCD[13])}}</td>
+    <td>Employees: {{ "{:0,d}".format(data_indicators_MCD[2])}}</td>
+    </tr>
+    </table>
+
+{% endblock content %}
+<br>
+<h1>Value Model</h1>
+<div id="matplotlib-lineplot" style="horiz-align: center;"></div>
 <py-script output="matplotlib-lineplot">
     import matplotlib.pyplot as plt
     fig, ax = plt.subplots()
@@ -18,9 +62,9 @@
     avg_Shiller = [(sum(Shiller_KGVs)/len(Shiller_KGVs))]
     plt.plot(Shiller_KGVs)
     plt.axhline(y = avg_Shiller, color = 'r', linestyle = '-')
-    plt.ylabel("Share PRice")
+    plt.ylabel("Share Price")
     fig
     </py-script>
-
+<div></div>
 </body>
 </html>
