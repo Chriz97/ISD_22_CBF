@@ -22,7 +22,7 @@
 {% block content %}
     <table class="table table-striped table-hover">
     <tr>
-    <td>Stock price, close yesterday:   </td>
+    <td>Stock Price: {{ "{:0,.2f}".format(data_indicators_VZ[15])}}</td>
     <td>Official Name: {{data_indicators_VZ[4]}}</td>
     </tr>
     <tr>

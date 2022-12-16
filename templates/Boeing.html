@@ -22,11 +22,11 @@
 {% block content %}
     <table class="table table-striped table-hover">
     <tr>
-    <td>Stock price, close yesterday:   </td>
+    <td>Stock price:  {{data_indicators_BA[15]}} </td>
     <td>Official Name: {{data_indicators_BA[4]}}</td>
     </tr>
     <tr>
-    <td>52 Week High: {{ "{:0,.2f}".format(data_indicators_BA[5])}}</td>
+    <td>52 Week High: {{ "{:0,.2f}".format(data_indicators_BA[15])}}</td>
     <td>Market Capitalization: {{ "{:0,d}".format(data_indicators_BA[12])}}</td>
     </tr>
     <tr>
