@@ -52,22 +52,5 @@
     </table>
 
 {% endblock content %}
-<table>
-    <td>
-    <h1 style="text-align: center">Value Model</h1>
-    <div id="matplotlib-lineplot" style="horiz-align: left;">
-    <py-script output="matplotlib-lineplot">
-        import matplotlib.pyplot as plt
-        fig, ax = plt.subplots()
-        cape ={{1,3,3,4,4,4,5,5}}
-        avg_Shiller = [(sum(cape)/len(cape))]
-        plt.plot(cape)
-        plt.axhline(y = avg_Shiller, color = 'r', linestyle = '-')
-        plt.ylabel("Historical CAPE")
-        fig
-    </py-script>
-    </div>
-    </td>
-</table>
 </body>
 </html>

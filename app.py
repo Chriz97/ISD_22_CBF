@@ -208,7 +208,7 @@ list_stock_price = list(df["Stock_Price"])
 # the Stock Information from the Excel Database and Connect the API calls to the HTML Template
 
 @app.route("/MMM", methods=["GET"])
-@login_required
+#@login_required
 def MMM():
     url_Time_Series_MMM = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=MMM&apikey=M9YDWDBER8VD0BTV'
     r_MMM = requests.get(url_Time_Series_MMM)
@@ -251,7 +251,6 @@ def AMGN():
     return render_template("Amgen.html", data_indicators_AMGN=list_indicators_AMGN, data_CAPE_AMGN=list_CAPE_AMGN, data_EXC_AMGN=list_EXC_AMGN)
 
 @app.route("/AAPL", methods=["GET"])
-@login_required
 def AAPL():
     list_indicators_AAPL = [list_ticker[3], list_beta[3], list_employees[3], list_exchange[3], list_name[3],
                           list_52_high[3], list_52_low[3], list_description[3], list_volume[3],
@@ -262,7 +261,7 @@ def AAPL():
     return render_template("Apple.html", data_indicators_AAPL=list_indicators_AAPL, data_CAPE_AAPL=list_CAPE_AAPL, data_EXC_AAPL=list_EXC_AAPL)
 
 @app.route("/BA", methods=["GET"])
-@login_required
+#@login_required
 def BA():
     list_indicators_BA = [list_ticker[4], list_beta[4], list_employees[4], list_exchange[4], list_name[4],
                           list_52_high[4], list_52_low[4], list_description[4], list_volume[4],
@@ -448,7 +447,7 @@ def NKE():
                            list_1_year_target[20], list_year_incorporated[20], list_stock_price[20]]
     list_CAPE_NKE = list(df_CAPE["NKE"])
     list_EXC_NKE =  list(df_EXC["NKE"])
-    return render_template("Nike.html", data_indicators_NKE=list_indicators_NKE, data_CAPE_NKE=list_CAPE_NKE, data_EXC_MSFT=list_EXC_NKE)
+    return render_template("Nike.html", data_indicators_NKE=list_indicators_NKE, data_CAPE_NKE=list_CAPE_NKE, data_EXC_NKE=list_EXC_NKE)
 
 @app.route("/PG", methods=["GET"])
 @login_required

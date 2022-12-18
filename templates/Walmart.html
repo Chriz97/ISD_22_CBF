@@ -12,6 +12,8 @@
 <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
     <py-env>
     - matplotlib
+    - numpy
+    - aquarel
     </py-env>
 </header>
 <body>
@@ -52,33 +54,51 @@
     </table>
 
 {% endblock content %}
-<table>
+<table class="table table-responsive">
     <td>
-    <h1 style="text-align: center">Value Model</h1>
+    <h1>CAPE</h1>
     <div id="matplotlib-lineplot" style="horiz-align: left;">
     <py-script output="matplotlib-lineplot">
         import matplotlib.pyplot as plt
-        fig, ax = plt.subplots()
-        cape ={{data_CAPE_WMT}}
-        avg_Shiller = [(sum(cape)/len(cape))]
-        plt.plot(cape)
-        plt.axhline(y = avg_Shiller, color = 'r', linestyle = '-')
-        plt.ylabel("Historical CAPE")
-        fig
+        import numpy as np
+        monate_strings = ["06/06", "12/08", "06/11", "12/13", "06/16", "12/18", "06/21"]
+        monate_zahlen = [0, 10, 20, 30, 40, 50, 60]
+        from aquarel import *
+        with load_theme("arctic_dark"):
+            fig1, ax1 = plt.subplots()
+            df_company_CAPE = {{ data_CAPE_WMT }}
+            np_array_CAPE = np.array(df_company_CAPE)
+            plt.plot(df_company_CAPE)
+            plt.xticks(monate_zahlen, monate_strings, rotation=25)
+            plt.axhline(y=np_array_CAPE.mean(), color='salmon', linestyle='-')
+            plt.axhline(y=np_array_CAPE.mean() + np_array_CAPE.std(ddof=1), color='g', linestyle='-')
+            plt.axhline(y=np_array_CAPE.mean() - np_array_CAPE.std(ddof=1), color='g', linestyle='-')
+            plt.axhline(y=np_array_CAPE.mean() + 2* np_array_CAPE.std(ddof=1), color='y', linestyle='-')
+            plt.axhline(y=np_array_CAPE.mean() - 2* np_array_CAPE.std(ddof=1), color='y', linestyle='-')
+            plt.ylabel("CAPE")
+        fig1
     </py-script>
     </div>
     </td>
     <td>
-    <h1 style="text-align: center;">Value Model</h1>
-    <div id="matplotlib-lineplot1" style="horiz-align: left">
+    <h1>Excess CAPE</h1>
+    <div id="matplotlib-lineplot1" style="horiz-align: right">
     <py-script output="matplotlib-lineplot1">
+        import numpy as np
         import matplotlib.pyplot as plt
-        fig1, ax1 = plt.subplots()
-        cape ={{data_CAPE_WMT}}
-        avg_Shiller = [(sum(cape)/len(cape))]
-        plt.plot(cape)
-        plt.axhline(y = avg_Shiller, color = 'r', linestyle = '-')
-        plt.ylabel("Historical CAPE")
+        from aquarel import *
+        with load_theme("arctic_dark"):
+            fig1, ax1 = plt.subplots()
+            df_company = {{ data_EXC_WMT }}
+            np_array_EXC = np.array(df_company)
+            plt.plot(df_company)
+            plt.xticks(monate_zahlen, monate_strings, rotation=25)
+            plt.axhline(y=np_array_EXC.mean(), color='salmon', linestyle='-')
+            plt.axhline(y=np_array_EXC.mean() + np_array_EXC.std(ddof=1), color='g', linestyle='-')
+            plt.axhline(y=np_array_EXC.mean() - np_array_EXC.std(ddof=1), color='g', linestyle='-')
+            plt.axhline(y=np_array_EXC.mean() + 2* np_array_EXC.std(ddof=1), color='y', linestyle='-')
+            plt.axhline(y=np_array_EXC.mean() - 2* np_array_EXC.std(ddof=1), color='y', linestyle='-')
+            plt.ylabel("Excess CAPE")
         fig1
     </py-script>
     </div>
