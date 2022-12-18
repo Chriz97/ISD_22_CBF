@@ -6,27 +6,8 @@
    right: 0px;
    margin-right:0px;
 }
-
-h3 {
-    font-family: "Times New Roman", Times, serif;
-    font-size: 10px;
-    color: darkblue;
-}
-
-text {
-  font-family: "Times New Roman", Times, serif;
-  font-size: 1.1rem;
-}
-
-h2 {
-    text-align: center;
-    color: darkblue;
-    font-size: 30px;
-}
-
 body {
   font-family: Arial, Verdana, sans-serif;
-  background-color: white;
 }
 
 marquee {
@@ -58,32 +39,17 @@ tr:hover{
     background-color: #c3e6e5;
 }
 
-
-header {
-  font-size: 1.5cm;
-  font-family: "Lucinda Grande", "Lucinda Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
-  color: darkblue;
-  text-align: center;
-}
 .navbar-brand-center {
   margin-left: auto;
   margin-right: auto;
 }
 
-img {
-  width: 800px;
-  height: 400px;
-}
-.btn-primary{
+.btn-primary {
     position: relative;
-     top:15px;
-     right:3px;
+    top: 15px;
+    right: 3px;
 }
-p {
-  color: red;
-}
-
-box{
+.box{
   width: 100%;
   text-align:center;
 }
