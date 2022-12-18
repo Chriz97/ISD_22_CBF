@@ -13,7 +13,7 @@
         <div>
           <h5>Instructions!</h5>
           <ul>
-            <li>Download <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en&gl=US" target="_blank">Google Authenticator</a> on your mobile.</li>
+            <li>Download <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en&gl=US" target="_blank">Google Authenticator</a> on your Android/IOS Smartphone.</li>
             <li>Create a new account with <strong>The SECRET TOKEN</strong> method.</li>
             <li>Provide the required details (name, SECRET TOKEN).</li>
             <li>Select time-based authentication.</li>
@@ -21,11 +21,10 @@
           </ul>
         </div>
         <div class="form-group">
-          <label for="secret">Secret Token</label>
+          <label for="secret">Secret Token: Use this code for your Google Authenticator Account setup</label>
           <input type="text" class="form-control" id="secret" value="{{ secret }}" readonly>
         </div>
         <div class="text-center">
-          <button type="button" class="btn btn-primary" onclick="copySecret()">Copy Secret</button>
         </div>
       </form>
     </div>
@@ -53,19 +52,4 @@
   </div>
 </div>
 
-<script>
-  function copySecret() {
-    /* Get the text field */
-    var copyText = document.getElementById("secret");
-
-    /* Select the text field */
-    copyText.select();
-    copyText.setSelectionRange(0, 99999); /*For mobile devices*/
-
-    /* Copy the text inside the text field */
-    document.execCommand("copy");
-
-    alert("Successfully copied TOTP secret token!");
-  }
-</script>
 {% endblock %}

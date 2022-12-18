@@ -17,12 +17,12 @@ import pandas as pd # Pandas to read Data from Files
 
 app = Flask(__name__, static_url_path='/static')
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
-app.config['SECRET_KEY'] = 'thisisasecretkey'
+app.config['SECRET_KEY'] = '2220_0390390_ajkölfja_1940'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 mail = Mail(app)
 
-# Today's Date
+# Yesterday's Date: Used to get the Stock Price from the Alphavantage API
 
 date_today = datetime.date.today()
 date_yesterday = date_today - datetime.timedelta(days=1)
@@ -38,7 +38,7 @@ app.config["MAIL_USE_TLS"] = False
 app.config["MAIL_USE_SSL"] = True
 mail = Mail(app)
 
-# Initialize the Login Manager according Flask Login
+# Initialize the Login Manager according to Flask Login
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -96,19 +96,20 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
 
 # Construct a Two-Factor Login Authentication Form with Usage of PYOTP and Google Authenticator
+# Pyotp is used to create a Pseudo Random Number based on base 32 with 32 Digits to ensure security
 @app.route("/login/2FACBF/")
 def login_2fa():
     # generating random secret key for authentication
-    secret_key_Cross_Border_Finance = pyotp.random_base32() # 32 Digits for the Secret Key
+    secret_key_Cross_Border_Finance = pyotp.random_base32(32) # Random Key, Base 32, 32 Digits
     return render_template("login_2fa.html", secret=secret_key_Cross_Border_Finance)
 @app.route("/login/2FACBF/", methods=["POST", "GET"])
 def login_2fa_form():
     # Secret Key from User
     secret_CBF = request.form.get("secret")
-    # Getting OPT
+    # Gett OPT (One Time Password)
     otp_CBF = int(request.form.get("otp"))
 
-    # verifying submitted OTP with PyOTP
+    # If Verified return user back to the Main Home Page, else restart process
     if pyotp.TOTP(secret_CBF).verify(otp_CBF):
         return redirect(url_for("hello_world"))
     else:
