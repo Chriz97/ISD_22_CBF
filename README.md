@@ -5,7 +5,7 @@ What does the Cross Border Finance Website offer you?
 - An overview of the Dow Jones Industrial Average
 - Briefly explains how the DOW is calculated daily
 - Stock Market Fundamentals which is even helpful for sophisticated traders
-- A unique Value Model which helps user to recognize overvalued and undervalued stocks
+- A unique Value Model which helps user to recognize overvalued and undervalued stocks (Please note that for CRM, DOW, GS and V the calculation for the Value Model is   not possible since the date of the IPO of these companies was much later than of all other companies)
 
 Our Application which is based on Flask and uses Github for the VCS-Implementation:
 
