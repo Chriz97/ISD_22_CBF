@@ -11,6 +11,7 @@ import datetime # Used for the API
 import requests # Used for the API
 import json # Used for the API
 import pandas as pd # Pandas to read Data from Files
+from datetime import datetime as date
 
 # Initialization of the Flask App and Setting up the Database for the registration Form as well as Bcrypt to encrypt Passwords#
 # Added the Mail Function too
@@ -23,9 +24,19 @@ bcrypt = Bcrypt(app)
 mail = Mail(app)
 
 # Yesterday's Date: Used to get the Stock Price from the Alphavantage API
+# Added the Case if today is a Sunday or Monday
+today = date.today().strftime("%A")
 
-date_today = datetime.date.today()
-date_yesterday = date_today - datetime.timedelta(days=1)
+if today == "Sunday":
+    date_today = datetime.date.today()
+    date_yesterday = date_today - datetime.timedelta(days=2)
+elif today == "Monday":
+    date_today = datetime.date.today()
+    date_yesterday = date_today - datetime.timedelta(days=3)
+else:
+    date_today = datetime.date.today()
+    date_yesterday = date_today - datetime.timedelta(days=1)
+
 
 # Setting up the Mail Module in Order to send an Email when the user creates an account.
 # Module Name = Flask Mail, Imports needed: Mail, Message
@@ -58,7 +69,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     first_name = db.Column(db.String(20))
     last_name = db.Column(db.String(20))
-    username = db.Column(db.String(10), nullable=True, unique=True) # 10 Characters max for username
+    username = db.Column(db.String(10), nullable=True, unique=True)  # 10 Characters max for username
     password = db.Column(db.String(80), nullable=True)
     email = db.Column(db.String(50), nullable=True, unique=True)
 
@@ -159,6 +170,16 @@ def register():
 def hello_world():  # put application's code here
     return render_template("main.html")
 
+# Get Data from Excel Sheet with all Shiller KGVs (CAPEs), for the first graph
+
+filename_Stock_CAPE = r"Shiller_KGV_full.xlsx"
+df_CAPE = pd.read_excel(filename_Stock_CAPE)
+x_axis = ["None"]
+
+# Inflation adjusted Earnings per Share for the second graph
+
+
+
 # Get Data from Excel Sheet which has all necessary indicators derived from Microsoft Finance
 
 filename_Stock_Indicators = r"Stocks_Indicators.xlsx"
@@ -198,7 +219,8 @@ def MMM():
                           list_52_high[0], list_52_low[0], list_description[0], list_volume[0],
                           list_outstanding[0], list_industry[0], list_headquarters[0], list_market_cap[0],
                           list_1_year_target[0], list_year_incorporated[0], list_stock_price[0]]
-    return render_template("3M.html", data_API_MMM=data_clean_MMM, data_indicators_MMM=list_indicators_MMM)
+    list_CAPE_MMM = list(df_CAPE["MMM"])
+    return render_template("3M.html", data_API_MMM=data_clean_MMM, data_indicators_MMM=list_indicators_MMM, data_CAPE_MMM=list_CAPE_MMM)
 
 @app.route("/AXP", methods=["GET"])
 #@login_required
@@ -212,7 +234,8 @@ def AXP():
                           list_52_high[1], list_52_low[1], list_description[1], list_volume[1],
                           list_outstanding[1], list_industry[1], list_headquarters[1], list_market_cap[1],
                           list_1_year_target[1], list_year_incorporated[1], list_stock_price[1]]
-    return render_template("American Express.html", data_API_AXP=data_clean_AXP, data_indicators_AXP=list_indicators_AXP)
+    list_CAPE_AXP = list(df_CAPE["AXP"])
+    return render_template("American Express.html", data_API_AXP=data_clean_AXP, data_indicators_AXP=list_indicators_AXP, data_CAPE_AXP=list_CAPE_AXP)
 
 @app.route("/AMGN", methods=["GET"])
 def AMGN():
@@ -220,7 +243,8 @@ def AMGN():
                           list_52_high[2], list_52_low[2], list_description[2], list_volume[2],
                           list_outstanding[2], list_industry[2], list_headquarters[2], list_market_cap[2],
                           list_1_year_target[2], list_year_incorporated[2], list_stock_price[2]]
-    return render_template("Amgen.html", data_indicators_AMGN=list_indicators_AMGN)
+    list_CAPE_AMGN = list(df_CAPE["AMGN"])
+    return render_template("Amgen.html", data_indicators_AMGN=list_indicators_AMGN, data_CAPE_AMGN=list_CAPE_AMGN)
 
 @app.route("/AAPL", methods=["GET"])
 def AAPL():
@@ -228,7 +252,8 @@ def AAPL():
                           list_52_high[3], list_52_low[3], list_description[3], list_volume[3],
                           list_outstanding[3], list_industry[3], list_headquarters[3], list_market_cap[3],
                           list_1_year_target[3], list_year_incorporated[3], list_stock_price[3]]
-    return render_template("Apple.html", data_indicators_AAPL=list_indicators_AAPL)
+    list_CAPE_AAPL = list(df_CAPE["AAPL"])
+    return render_template("Apple.html", data_indicators_AAPL=list_indicators_AAPL, data_CAPE_AAPL=list_CAPE_AAPL)
 
 @app.route("/BA", methods=["GET"])
 def BA():
@@ -236,7 +261,8 @@ def BA():
                           list_52_high[4], list_52_low[4], list_description[4], list_volume[4],
                           list_outstanding[4], list_industry[4], list_headquarters[4], list_market_cap[4],
                           list_1_year_target[4], list_year_incorporated[4], list_stock_price[4]]
-    return render_template("Boeing.html", data_indicators_BA=list_indicators_BA)
+    list_CAPE_BA = list(df_CAPE["BA"])
+    return render_template("Boeing.html", data_indicators_BA=list_indicators_BA, data_CAPE_BA=list_CAPE_BA)
 
 @app.route("/CAT", methods=["GET"])
 def CAT():
@@ -244,7 +270,8 @@ def CAT():
                           list_52_high[5], list_52_low[5], list_description[5], list_volume[5],
                           list_outstanding[5], list_industry[5], list_headquarters[5], list_market_cap[5],
                           list_1_year_target[5], list_year_incorporated[5],list_stock_price[5]]
-    return render_template("Caterpillar.html", data_indicators_CAT=list_indicators_CAT)
+    list_CAPE_CAT = list(df_CAPE["CAT"])
+    return render_template("Caterpillar.html", data_indicators_CAT=list_indicators_CAT, data_CAPE_CAT=list_CAPE_CAT)
 
     return render_template("Caterpillar.html")
 
@@ -254,7 +281,8 @@ def CVX():
                           list_52_high[6], list_52_low[6], list_description[6], list_volume[6],
                           list_outstanding[6], list_industry[6], list_headquarters[6], list_market_cap[6],
                           list_1_year_target[6], list_year_incorporated[6], list_stock_price[6]]
-    return render_template("Chevron.html", data_indicators_CVX=list_indicators_CVX)
+    list_CAPE_CVX = list(df_CAPE["CVX"])
+    return render_template("Chevron.html", data_indicators_CVX=list_indicators_CVX, data_CAPE_CVX=list_CAPE_CVX)
 
 @app.route("/CSCO", methods=["GET"])
 def CSCO():
@@ -262,7 +290,8 @@ def CSCO():
                           list_52_high[7], list_52_low[7], list_description[7], list_volume[7],
                           list_outstanding[7], list_industry[7], list_headquarters[7], list_market_cap[7],
                           list_1_year_target[7], list_year_incorporated[7], list_stock_price[7]]
-    return render_template("Cisco.html", data_indicators_CSCO=list_indicators_CSCO)
+    list_CAPE_CSCO = list(df_CAPE["CSCO"])
+    return render_template("Cisco.html", data_indicators_CSCO=list_indicators_CSCO, data_CAPE_CSCO=list_CAPE_CSCO)
 
 @app.route("/KO", methods=["GET"])
 def KO():
@@ -270,7 +299,8 @@ def KO():
                           list_52_high[8], list_52_low[8], list_description[8], list_volume[8],
                           list_outstanding[8], list_industry[8], list_headquarters[8], list_market_cap[8],
                           list_1_year_target[8], list_year_incorporated[8], list_stock_price[8]]
-    return render_template("Coca-Cola.html", data_indicators_KO=list_indicators_KO)
+    list_CAPE_KO = list(df_CAPE["KO"])
+    return render_template("Coca-Cola.html", data_indicators_KO=list_indicators_KO, data_CAPE_KO=list_CAPE_KO)
 
 @app.route("/DOW", methods=["GET"])
 def DOW():
@@ -286,6 +316,7 @@ def GS():
                           list_52_high[10], list_52_low[10], list_description[10], list_volume[10],
                           list_outstanding[10], list_industry[10], list_headquarters[10], list_market_cap[10],
                           list_1_year_target[10], list_year_incorporated[10], list_stock_price[10]]
+    #list_CAPE_GS = list(df_CAPE["GS"])
     return render_template("Goldman Sachs.html", data_indicators_GS=list_indicators_GS)
 
 @app.route("/HD", methods=["GET"])
@@ -294,7 +325,8 @@ def HD():
                            list_52_high[11], list_52_low[11], list_description[11], list_volume[11],
                            list_outstanding[11], list_industry[11], list_headquarters[11], list_market_cap[11],
                            list_1_year_target[11], list_year_incorporated[11], list_stock_price[11]]
-    return render_template("Home Depot.html", data_indicators_HD=list_indicators_HD)
+    list_CAPE_HD = list(df_CAPE["CAT"])
+    return render_template("Home Depot.html", data_indicators_HD=list_indicators_HD, data_CAPE_HD=list_CAPE_HD)
 
 @app.route("/HON", methods=["GET"])
 def HON():
@@ -302,7 +334,8 @@ def HON():
                            list_52_high[12], list_52_low[12], list_description[12], list_volume[12],
                            list_outstanding[12], list_industry[12], list_headquarters[12], list_market_cap[12],
                            list_1_year_target[12], list_year_incorporated[12], list_stock_price[12]]
-    return render_template("Honeywell.html", data_indicators_HON=list_indicators_HON)
+    list_CAPE_HON = list(df_CAPE["CAT"])
+    return render_template("Honeywell.html", data_indicators_HON=list_indicators_HON, data_CAPE_HON=list_CAPE_HON)
 
 @app.route("/INTC", methods=["GET"])
 def INTC():
@@ -310,7 +343,8 @@ def INTC():
                            list_52_high[13], list_52_low[13], list_description[13], list_volume[13],
                            list_outstanding[13], list_industry[13], list_headquarters[13], list_market_cap[13],
                            list_1_year_target[13], list_year_incorporated[13], list_stock_price[13]]
-    return render_template("Intel.html", data_indicators_INTC=list_indicators_INTC)
+    list_CAPE_INTC = list(df_CAPE["INTC"])
+    return render_template("Intel.html", data_indicators_INTC=list_indicators_INTC, data_CAPE_INTC=list_CAPE_INTC)
 
 @app.route("/IBM", methods=["GET"])
 def IBM():
@@ -323,7 +357,8 @@ def IBM():
                            list_52_high[14], list_52_low[14], list_description[14], list_volume[14],
                            list_outstanding[14], list_industry[14], list_headquarters[14], list_market_cap[14],
                            list_1_year_target[14], list_year_incorporated[14]]
-    return render_template("IBM.html", data=data_clean_IBM, data_indicators_IBM=list_indicators_IBM)
+    list_CAPE_IBM = list(df_CAPE["IBM"])
+    return render_template("IBM.html", data_API_IBM=data_clean_IBM, data_indicators_IBM=list_indicators_IBM, data_CAPE_IBM=list_CAPE_IBM)
 
 @app.route("/JNJ", methods=["GET"])
 def JNJ():
@@ -331,7 +366,8 @@ def JNJ():
                            list_52_high[15], list_52_low[15], list_description[15], list_volume[15],
                            list_outstanding[15], list_industry[15], list_headquarters[15], list_market_cap[15],
                            list_1_year_target[15], list_year_incorporated[15], list_stock_price[15]]
-    return render_template("Johnson and Johnson.html", data_indicators_JNJ=list_indicators_JNJ)
+    list_CAPE_JNJ = list(df_CAPE["JNJ"])
+    return render_template("Johnson and Johnson.html", data_indicators_JNJ=list_indicators_JNJ, data_CAPE_JNJ=list_CAPE_JNJ)
 
 @app.route("/JPM", methods=["GET"])
 def JPM():
@@ -339,7 +375,8 @@ def JPM():
                            list_52_high[16], list_52_low[16], list_description[16], list_volume[16],
                            list_outstanding[16], list_industry[16], list_headquarters[16], list_market_cap[16],
                            list_1_year_target[16], list_year_incorporated[16], list_stock_price[16]]
-    return render_template("JPMorgan Chase.html", data_indicators_JMP=list_indicators_JPM)
+    list_CAPE_JPM = list(df_CAPE["JPM"])
+    return render_template("JPMorgan Chase.html", data_indicators_JMP=list_indicators_JPM, data_CAPE_JPM=list_CAPE_JPM)
 
 @app.route("/MCD", methods=["GET"])
 def MCD():
@@ -347,7 +384,8 @@ def MCD():
                            list_52_high[17], list_52_low[17], list_description[17], list_volume[17],
                            list_outstanding[17], list_industry[17], list_headquarters[17], list_market_cap[17],
                            list_1_year_target[17], list_year_incorporated[17], list_stock_price[17]]
-    return render_template("McDonalds.html", data_indicators_MCD=list_indicators_MCD)
+    list_CAPE_MCD = list(df_CAPE["MCD"])
+    return render_template("McDonalds.html", data_indicators_MCD=list_indicators_MCD, data_CAPE_MCD=list_CAPE_MCD)
 
 @app.route("/MRK", methods=["GET"])
 def MRK():
@@ -355,7 +393,8 @@ def MRK():
                            list_52_high[18], list_52_low[18], list_description[18], list_volume[18],
                            list_outstanding[18], list_industry[18], list_headquarters[18], list_market_cap[18],
                            list_1_year_target[18], list_year_incorporated[18], list_stock_price[18]]
-    return render_template("Merck.html", data_indicators_MRK=list_indicators_MRK)
+    list_CAPE_MRK = list(df_CAPE["MRK"])
+    return render_template("Merck.html", data_indicators_MRK=list_indicators_MRK, data_CAPE_MRK=list_CAPE_MRK)
 
 @app.route("/MSFT", methods=["GET"])
 def MSFT():
@@ -363,7 +402,8 @@ def MSFT():
                            list_52_high[19], list_52_low[19], list_description[19], list_volume[19],
                            list_outstanding[19], list_industry[19], list_headquarters[19], list_market_cap[19],
                            list_1_year_target[19], list_year_incorporated[19], list_stock_price[19]]
-    return render_template("Microsoft.html", data_indicators_MSFT=list_indicators_MSFT)
+    list_CAPE_MSFT = list(df_CAPE["MSFT"])
+    return render_template("Microsoft.html", data_indicators_MSFT=list_indicators_MSFT, data_CAPE_MSFT=list_CAPE_MSFT)
 
 @app.route("/NKE", methods=["GET"])
 def NKE():
@@ -371,7 +411,8 @@ def NKE():
                            list_52_high[20], list_52_low[20], list_description[20], list_volume[20],
                            list_outstanding[20], list_industry[20], list_headquarters[20], list_market_cap[20],
                            list_1_year_target[20], list_year_incorporated[20], list_stock_price[20]]
-    return render_template("Nike.html", data_indicators_NKE=list_indicators_NKE)
+    list_CAPE_NKE = list(df_CAPE["NKE"])
+    return render_template("Nike.html", data_indicators_NKE=list_indicators_NKE, data_CAPE_NKE=list_CAPE_NKE)
 
 @app.route("/PG", methods=["GET"])
 def PG():
@@ -379,7 +420,8 @@ def PG():
                            list_52_high[21], list_52_low[21], list_description[21], list_volume[21],
                            list_outstanding[21], list_industry[21], list_headquarters[21], list_market_cap[21],
                            list_1_year_target[21], list_year_incorporated[21], list_stock_price[21]]
-    return render_template("Procter and Gamble.html", data_indicators_PG=list_indicators_PG)
+    list_CAPE_PG = list(df_CAPE["PG"])
+    return render_template("Procter and Gamble.html", data_indicators_PG=list_indicators_PG, data_CAPE_PG=list_CAPE_PG)
 
 @app.route("/CRM", methods=["GET"])
 def CRM():
@@ -395,7 +437,8 @@ def TRV():
                            list_52_high[23], list_52_low[23], list_description[23], list_volume[23],
                            list_outstanding[23], list_industry[23], list_headquarters[23], list_market_cap[23],
                            list_1_year_target[23], list_year_incorporated[23], list_stock_price[23]]
-    return render_template("Travelers.html", data_indicators_TRV=list_indicators_TRV)
+    list_CAPE_TRV = list(df_CAPE["TRV"])
+    return render_template("Travelers.html", data_indicators_TRV=list_indicators_TRV, data_CAPE_TRV=list_CAPE_TRV)
 
 @app.route("/UNH", methods=["GET"])
 def UNH():
@@ -403,7 +446,8 @@ def UNH():
                            list_52_high[24], list_52_low[24], list_description[24], list_volume[24],
                            list_outstanding[24], list_industry[24], list_headquarters[24], list_market_cap[24],
                            list_1_year_target[24], list_year_incorporated[24], list_stock_price[24]]
-    return render_template("United Health.html", data_indicators_UNH=list_indicators_UNH)
+    list_CAPE_UNH = list(df_CAPE["UNH"])
+    return render_template("United Health.html", data_indicators_UNH=list_indicators_UNH, data_CAPE_UNH=list_CAPE_UNH)
 
 @app.route("/VZ", methods=["GET"])
 def VZ():
@@ -411,7 +455,8 @@ def VZ():
                            list_52_high[25], list_52_low[25], list_description[25], list_volume[25],
                            list_outstanding[25], list_industry[25], list_headquarters[25], list_market_cap[25],
                            list_1_year_target[25], list_year_incorporated[25], list_stock_price[25]]
-    return render_template("Verizon.html", data_indicators_VZ=list_indicators_VZ)
+    list_CAPE_VZ = list(df_CAPE["VZ"])
+    return render_template("Verizon.html", data_indicators_VZ=list_indicators_VZ, data_CAPE_VZ=list_CAPE_VZ)
 
 @app.route("/V", methods=["GET"])
 def V():
@@ -427,7 +472,8 @@ def WBA():
                            list_52_high[27], list_52_low[27], list_description[27], list_volume[27],
                            list_outstanding[27], list_industry[27], list_headquarters[27], list_market_cap[27],
                            list_1_year_target[27], list_year_incorporated[27], list_stock_price[27]]
-    return render_template("Walgreens Boots Alliance.html", data_indicators_WBA=list_indicators_WBA)
+    list_CAPE_WBA = list(df_CAPE["WBA"])
+    return render_template("Walgreens Boots Alliance.html", data_indicators_WBA=list_indicators_WBA, data_CAPE_WBA=list_CAPE_WBA)
 
 @app.route("/WMT", methods=["GET"])
 def WMT():
@@ -435,7 +481,8 @@ def WMT():
                            list_52_high[28], list_52_low[28], list_description[28], list_volume[28],
                            list_outstanding[28], list_industry[28], list_headquarters[28], list_market_cap[28],
                            list_1_year_target[28], list_year_incorporated[28], list_stock_price[28]]
-    return render_template("Walmart.html", data_indicators_WMT=list_indicators_WMT)
+    list_CAPE_WMT = list(df_CAPE["WMT"])
+    return render_template("Walmart.html", data_indicators_WMT=list_indicators_WMT, data_CAPE_WMT=list_CAPE_WMT)
 
 @app.route("/DIS", methods=["GET"])
 def DIS():
@@ -443,7 +490,8 @@ def DIS():
                            list_52_high[29], list_52_low[29], list_description[29], list_volume[29],
                            list_outstanding[29], list_industry[29], list_headquarters[29], list_market_cap[29],
                            list_1_year_target[29], list_year_incorporated[29], list_stock_price[29]]
-    return render_template("Walt Disney.html", data_indicators_DIS=list_indicators_DIS)
+    list_CAPE_DIS = list(df_CAPE["DIS"])
+    return render_template("Walt Disney.html", data_indicators_DIS=list_indicators_DIS, data_CAPE_DIS=list_CAPE_DIS)
 
 # Initialize the Flask APP with app.run
 

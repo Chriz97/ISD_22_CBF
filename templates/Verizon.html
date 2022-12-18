@@ -52,19 +52,36 @@
     </table>
 
 {% endblock content %}
-<br>
-<h1>Value Model</h1>
-<div id="matplotlib-lineplot" style="horiz-align: center;"></div>
-<py-script output="matplotlib-lineplot">
-    import matplotlib.pyplot as plt
-    fig, ax = plt.subplots()
-    Shiller_KGVs = [4.511768010962432, 5.640196217496208, 6.822344795716345, 6.125263042143806, 8.035439477897881, 9.39129295596785, 9.259391681969461, 9.147168138454932, 10.060021906936274, 11.174790281416103, 16.09924874615331, 15.343035970223266, 22.21408144362184, 20.649684695072217, 18.33139444643146, 18.18682848506845, 18.15391326485869, 18.501856265780063, 13.954734499711483, 15.593230448567205, 18.13386840220621, 14.695034909868248, 19.55528269905499, 16.61594041602589, 11.432366692260409, 9.203328106590146, 12.238761382722057, 12.162376859134152, 12.828779664630975, 13.624336193963236, 14.364296301222257, 13.999009924462486, 13.290108566846493, 12.898144021684065, 14.79775888090255, 13.503649861278967, 10.897104409634972, 11.526409707290023, 11.930761613678735, 11.895316835521347]
-    avg_Shiller = [(sum(Shiller_KGVs)/len(Shiller_KGVs))]
-    plt.plot(Shiller_KGVs)
-    plt.axhline(y = avg_Shiller, color = 'r', linestyle = '-')
-    plt.ylabel("Share Price")
-    fig
+<table>
+    <td>
+    <h1 style="text-align: center">Value Model</h1>
+    <div id="matplotlib-lineplot" style="horiz-align: left;">
+    <py-script output="matplotlib-lineplot">
+        import matplotlib.pyplot as plt
+        fig, ax = plt.subplots()
+        cape ={{data_CAPE_VZ}}
+        avg_Shiller = [(sum(cape)/len(cape))]
+        plt.plot(cape)
+        plt.axhline(y = avg_Shiller, color = 'r', linestyle = '-')
+        plt.ylabel("Historical CAPE")
+        fig
     </py-script>
-<div></div>
-</body>
+    </div>
+    </td>
+    <td>
+    <h1 style="text-align: center;">Value Model</h1>
+    <div id="matplotlib-lineplot1" style="horiz-align: left">
+    <py-script output="matplotlib-lineplot1">
+        import matplotlib.pyplot as plt
+        fig1, ax1 = plt.subplots()
+        cape ={{data_CAPE_VZ}}
+        avg_Shiller = [(sum(cape)/len(cape))]
+        plt.plot(cape)
+        plt.axhline(y = avg_Shiller, color = 'r', linestyle = '-')
+        plt.ylabel("Historical CAPE")
+        fig1
+    </py-script>
+    </div>
+    </td>
+</table>
 </html>
