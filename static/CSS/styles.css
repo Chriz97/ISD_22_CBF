@@ -8,35 +8,59 @@
 }
 body {
   font-family: Arial, Verdana, sans-serif;
+  background-image: url("/static/BG.png");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 marquee {
     color: orangered;
     background-color: black;
+    justify-content: space-between;
 }
 
 table {
-    width: 80%;
+    margin: auto;
+    border-collapse: collapse;
+    font-size: 1em;
+    min-width: 1200px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    border: black 5px;
+
 }
 
-th, td {
-    padding: 7px 7px 7px 7px;
+table th,
+table td {
+    padding: 12px 15px;
 }
 
-th {
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-size: 70%;
-    border-bottom: 2px solid #111111;
-    border-top: 1px solid #999;
-    text-align: left;
+table tbody tr {
+    border-bottom: 1px solid #dddddd;
 }
 
-tr.even {
-    background-color: #efefef;
+table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
 }
-tr:hover{
-    background-color: #c3e6e5;
+
+table tbody tr:nth-of-type(odd) {
+    background-color: lightgray;
+}
+
+th  {
+    background-color: slateblue;
+}
+
+th:first-of-type {
+  border-top-left-radius: 10px;
+}
+th:last-of-type {
+  border-top-right-radius: 10px;
+}
+tr:last-of-type td:first-of-type {
+  border-bottom-left-radius: 10px;
+}
+tr:last-of-type td:last-of-type {
+  border-bottom-right-radius: 10px;
 }
 
 .navbar-brand-center {
@@ -49,6 +73,11 @@ tr:hover{
     top: 15px;
     right: 3px;
 }
+
+a {
+    color: black;
+}
+
 .box{
   width: 100%;
   text-align:center;

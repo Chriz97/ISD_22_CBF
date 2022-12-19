@@ -103,7 +103,7 @@ class LoginForm(FlaskForm):
     password = PasswordField(validators=[
                              InputRequired(), Length(min=8, max=20)], render_kw={"placeholder": "Password"})
 
-    submit = SubmitField("Continue to 2 Factor Authentication")
+    submit = SubmitField("Continue to 2FA")
 
 # Construct a Two-Factor Login Authentication Form with Usage of PYOTP and Google Authenticator
 # Pyotp is used to create a Pseudo Random Number based on base 32 with 32 Digits to ensure security
@@ -261,7 +261,7 @@ def AAPL():
     return render_template("Apple.html", data_indicators_AAPL=list_indicators_AAPL, data_CAPE_AAPL=list_CAPE_AAPL, data_EXC_AAPL=list_EXC_AAPL)
 
 @app.route("/BA", methods=["GET"])
-#@login_required
+@login_required
 def BA():
     list_indicators_BA = [list_ticker[4], list_beta[4], list_employees[4], list_exchange[4], list_name[4],
                           list_52_high[4], list_52_low[4], list_description[4], list_volume[4],

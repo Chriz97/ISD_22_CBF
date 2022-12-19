@@ -10,11 +10,58 @@ h1 {
   left: 10px;
 }
 
-table {
-    width: 80%;
+body {
+  background-image: url("/static/BG.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
+table {
+    margin: auto;
+    border-collapse: collapse;
+    font-size: 1em;
+    min-width: 1400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    border: black 5px;
+
+}
+
+table th,
+table td {
+    padding: 12px 15px;
+}
+
+table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+table tbody tr:nth-of-type(odd) {
+    background-color: lightgray;
+}
+
+th  {
+    background-color: slateblue;
+}
+
+th:first-of-type {
+  border-top-left-radius: 10px;
+}
+th:last-of-type {
+  border-top-right-radius: 10px;
+}
+tr:last-of-type td:first-of-type {
+  border-bottom-left-radius: 10px;
+}
+tr:last-of-type td:last-of-type {
+  border-bottom-right-radius: 10px;
+}
 .navbar-brand-center {
   margin-left: auto;
   margin-right: auto;
 }
+

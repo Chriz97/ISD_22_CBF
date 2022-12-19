@@ -23,10 +23,11 @@ h2 {
     text-align: center;
 }
 
-.form-control {
-  max-width: 330px;
-  padding: 15px;
-}
+.login-form{
+      border-radius: 23px;
+      background-color: #fff;
+      padding: 30px;
+      }
 
 .form-signin .form-floating:focus-within {
   z-index: 2;

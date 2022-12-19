@@ -64,7 +64,7 @@
         monate_strings = ["06/06", "12/08", "06/11", "12/13", "06/16", "12/18", "06/21"]
         monate_zahlen = [0, 10, 20, 30, 40, 50, 60]
         from aquarel import *
-        with load_theme("arctic_dark"):
+        with load_theme("minimal_dark"):
             fig1, ax1 = plt.subplots()
             df_company_CAPE = {{ data_CAPE_HD }}
             np_array_CAPE = np.array(df_company_CAPE)
@@ -87,7 +87,7 @@
         import numpy as np
         import matplotlib.pyplot as plt
         from aquarel import *
-        with load_theme("arctic_dark"):
+        with load_theme("minimal_dark"):
             fig1, ax1 = plt.subplots()
             df_company = {{ data_EXC_HD}}
             np_array_EXC = np.array(df_company)
