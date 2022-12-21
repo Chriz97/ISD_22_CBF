@@ -5,6 +5,9 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
     <style type="text/css">
+       html {
+      overflow: hidden;
+      }
       body{
       background-image: url("/static/login_page_picture.jpg");
       background-size: cover;
@@ -42,8 +45,6 @@
           <form class="login-form" method="POST" action="">
             <div class="mb-3">
                  {{ form.hidden_tag() }}
-             </div>
-             <div class="mb-3">
               {{form.username(class="form-control") }}
             </div>
             <div class="mb-3">
@@ -52,9 +53,19 @@
             <div class="text-center">
                 {{ form.submit(class="btn-primary")}}
             </div>
+              <hr>
+            <div class="text-center">
+            <a style="text-decoration: none;" href="{{ url_for('register') }}">Sign up for Cross Border Finance</a>
+                <br>
+            <a style="text-decoration: none;" href="{{ url_for("hello_world")}}">Back to the Home Page?</a>
+            </div>
           </form>
         </div>
       </div>
+    </div>
+    </form>
+        </div>
+    </div>
     </div>
   </body>
 </html>
