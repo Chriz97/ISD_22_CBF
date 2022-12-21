@@ -25,7 +25,6 @@ mail = Mail(app)
 # Yesterday's Date: Used to get the Stock Price from the Alphavantage API
 # Added the Case if today is a Sunday or Monday
 today = date.today().strftime("%A")
-
 if today == "Sunday":
     date_today = datetime.date.today()
     date_yesterday = date_today - datetime.timedelta(days=2)
