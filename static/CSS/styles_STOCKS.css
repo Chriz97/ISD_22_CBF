@@ -11,7 +11,7 @@ h1 {
 }
 
 body {
-  background-image: url("/static/BG.png");
+  background-image: url("/static/123456789.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -30,38 +30,47 @@ table {
 table th,
 table td {
     padding: 12px 15px;
+    text-align: left;
+    font-size: 1.2em;
 }
 
 table tbody tr {
     border-bottom: 1px solid #dddddd;
 }
 
+table tbody tr:nth-of-type(8) {
+    border-bottom: black;
+}
+
 table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
+    color: white;
+    background: black;
 }
 
 table tbody tr:nth-of-type(odd) {
-    background-color: lightgray;
+    color: white;
+    background: black;
 }
 
-th  {
-    background-color: slateblue;
+table tbody tr:nth-of-type(8) {
+    color: white;
+    background: black;
+    row-span: 2;
+    align-content: center;
+    }
+
+table tr:last-child{
+    background:black;
 }
 
-th:first-of-type {
-  border-top-left-radius: 10px;
+
+form{
+    margin: auto;
+    min-width: 1400px;
+
 }
-th:last-of-type {
-  border-top-right-radius: 10px;
-}
-tr:last-of-type td:first-of-type {
-  border-bottom-left-radius: 10px;
-}
-tr:last-of-type td:last-of-type {
-  border-bottom-right-radius: 10px;
-}
+
 .navbar-brand-center {
   margin-left: auto;
   margin-right: auto;
 }
-

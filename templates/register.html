@@ -11,7 +11,7 @@
 </head>
     <style type="text/css">
       body{
-      background-image: url("/static/NYC.jpg");
+      background-image: url("/static/login_page_picture.jpg");
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
@@ -24,7 +24,7 @@
       h3{
       color: white;
       text-align: center;
-      margin-top: 10px;
+      margin-top: 100px;
       }
       h1{
           color: white;
@@ -41,7 +41,7 @@
         </div>
      </div>
        <div class="container">
-      <div class="row align-items-center justify-content-center vh-100">
+      <div class="row align-items-center justify-content-center">
         <div class="col-md-4">
           <form class="login-form" method="POST" action="">
             <div class="mb-3">
@@ -66,6 +66,7 @@
               <hr>
             <div class="text-center">
             <a href="{{ url_for('login') }}">Already have an account?</a>
+                <br>
             <a href="{{ url_for("hello_world")}}">Back to the Home Page?</a>
             </div>
           </form>
