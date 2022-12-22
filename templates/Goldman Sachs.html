@@ -2,27 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>IBM</title>
+    <title>Goldman Sachs</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles_STOCKS.css') }}">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-5-strong">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{{ url_for('hello_world') }}">Cross Border Finance</a>
+            </div>
+    </div>
+    </nav>
 </head>
 <header>
 <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
 <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
     <py-env>
     - matplotlib
+    - numpy
+    - aquarel
     </py-env>
 </header>
 <body>
-<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-  <a class="navbar-brand-center" style="font-size: 40px;">Goldman Sachs</a>
-</nav>
-<br>
+    <div class="container">
+    <form class="center-block" style="background-color: black;   max-width: 1400px; height: 70px">
+        <br>
+    <h3 class="h3" style="color: white; text-align: center;">Goldman Sachs</h3>
+        </a>
+    </form>
+    </div>
 {% block content %}
-    <table class="table table-striped table-hover">
+    <table>
     <tr>
-    <td>Stock Price: {{ "{:0,.2f}".format(data_indicators_GS[15])}}</td>
+    <td style="width: 50% ">Previous Close:  {{data_API_GS}} </td>
     <td>Official Name: {{data_indicators_GS[4]}}</td>
     </tr>
     <tr>
@@ -50,7 +61,6 @@
     <td>Employees: {{ "{:0,d}".format(data_indicators_GS[2])}}</td>
     </tr>
     </table>
-
 {% endblock content %}
 </body>
 </html>

@@ -525,7 +525,7 @@ def MSFT():
                            list_1_year_target[19], list_year_incorporated[19], list_stock_price[19]]
     list_CAPE_MSFT = list(df_CAPE["MSFT"])
     list_EXC_MSFT =  list(df_EXC["MSFT"])
-    return render_template("Microsoft.html", data_indicators_MSFT=list_indicators_MSFT, data_CAPE_MSFT=list_CAPE_MSFT, data_EXC_MSFT=list_EXC_MSFT)
+    return render_template("Microsoft.html", data_API_MSFT=data_clean_MSFT, data_indicators_MSFT=list_indicators_MSFT, data_CAPE_MSFT=list_CAPE_MSFT, data_EXC_MSFT=list_EXC_MSFT)
 
 @app.route("/NKE", methods=["GET"])
 @login_required
