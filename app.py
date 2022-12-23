@@ -13,8 +13,8 @@ import json # Used for the API
 import pandas as pd  # Pandas to read Data from Files
 from datetime import datetime as date
 
-# Initialization of the Flask App and Setting up the Database for the registration Form as well as Bcrypt to encrypt Passwords#
-# Added the Mail Function too
+# Initialization of the Flask App and Setting up the Database for the registration Form as well as Bcrypt to encrypt Passwords
+# and the Flask Mail Module to send users a Welcome Message after a successful Sign-Up Process
 
 app = Flask(__name__, static_url_path='/static')
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
@@ -23,7 +23,8 @@ db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 mail = Mail(app)
 # Yesterday's Date: Used to get the Stock Price from the Alphavantage API
-# Added the Case if today is a Sunday or Monday
+# Added an IF-Statement to determine whether today is Sunday or Monday to not break the API
+
 today = date.today().strftime("%A")
 if today == "Sunday":
     date_today = datetime.date.today()
@@ -47,13 +48,13 @@ app.config["MAIL_USE_TLS"] = False
 app.config["MAIL_USE_SSL"] = True
 mail = Mail(app)
 
-# Initialize the Login Manager according to Flask Login
+# Initialize the Login Manager according to the Flask Login Documentation
 
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
-# Creating the Entity and the Attributes of the Database Schema
+# Creating the Table (Entity) and the Attributes of the Database Schema
 @app.before_first_request # Not an error: Decorator is not usable after Flask Version 2.3.
 def create_tables():
      db.create_all()
@@ -61,25 +62,24 @@ def create_tables():
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-# SQL-Code (SQLITE): Creation of the Database: Name, Username, Password, Name and Email are required for the sign-up process
-
+# SQL-Code (SQLITE): Creation of the Database: Name, Username, Password, Name and Email are required for the Sign-Up process
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     first_name = db.Column(db.String(20))
     last_name = db.Column(db.String(20))
-    username = db.Column(db.String(10), nullable=True, unique=True)  # 10 Characters max for username
-    password = db.Column(db.String(80), nullable=True)
-    email = db.Column(db.String(50), nullable=True, unique=True)
+    username = db.Column(db.String(10), unique=True)  # 10 Characters max for username
+    password = db.Column(db.String(80))
+    email = db.Column(db.String(50), unique=True)
 
 # Registration Form: First Name, Last Name, Username, Password, Email, Date of birth + Validators and Render_KW
 
 class RegisterForm(FlaskForm):
 
-    first_name = StringField(validators=[InputRequired(), Length(min=3, max=50)], render_kw={"placeholder": "First Name"})
+    first_name = StringField(validators=[InputRequired(), Length(min=2, max=20)], render_kw={"placeholder": "First Name"})
 
-    last_name = StringField(validators=[InputRequired(), Length(min=3, max=50)], render_kw={"placeholder": "Last Name"})
+    last_name = StringField(validators=[InputRequired(), Length(min=3, max=20)], render_kw={"placeholder": "Last Name"})
 
-    username = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
+    username = StringField(validators=[InputRequired(), Length(min=4, max=10)], render_kw={"placeholder": "Username"})
 
     password = PasswordField(validators=[InputRequired(), Length(min=8, max=20)], render_kw={"placeholder": "New Password"})
 
@@ -147,6 +147,7 @@ def logout():
 
 # Registration Form + User receives an email if he successfully created an account
 
+
 @ app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm()
@@ -155,8 +156,11 @@ def register():
         hashed_password = bcrypt.generate_password_hash(form.password.data)
         new_user = User(first_name=form.first_name.data, last_name=form.last_name.data,username=form.username.data, password=hashed_password, email=form.email.data)
         db.session.add(new_user)
-        msg = Message("Welcome to Cross Border Finance", sender="noreply@crossborderfinance.com", recipients=[form.email.data])
-        msg.body = "Thanks for creating your account. You can now fully use the Cross Border Finance Website"
+        msg = Message("Welcome to Cross Border Finance", sender="chrise2012.mayer@gmail.com", recipients=[form.email.data])
+        msg.body = "Thanks for creating your account. You can now fully experience the Cross Border Finance Website. " \
+                   "Please see the attached PDF Guide for further information on the website."
+        with app.open_resource("msc1.pdf") as attachment:
+            msg.attach("msc1.pdf", "text/pdf", attachment.read())
         mail.send(msg)
         db.session.commit()
         return redirect(url_for('hello_world'))
