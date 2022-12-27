@@ -7,7 +7,6 @@ from wtforms.validators import InputRequired, Length, ValidationError # Validato
 from flask_bcrypt import Bcrypt # Used to decrypt Passwords in the Database, is a security feature
 from flask_mail import Mail, Message # Flask Mail Support ==> Confirmation Mail for a new user
 import pyotp  # For 2-Factor Authentication
-import datetime  # Used for the API
 import requests  # Used for the API
 import json  # Used for the API
 import pandas as pd  # Pandas to read Data from Files
@@ -30,8 +29,8 @@ mail = Mail(app)
 # Function: is_trading_day returns True in this case.
 
 date_today = datetime.date.today()
-n = 1
-date_yesterday = str(date_today - datetime.timedelta(days=n))
+delta_today = 1
+date_yesterday = str(date_today - datetime.timedelta(days=delta_today))
 
 def is_trading_day(date_yesterday):
     # Convert the input date to a datetime object
@@ -42,8 +41,8 @@ def is_trading_day(date_yesterday):
     return date.isoweekday() in range(1, 6) and date not in hdays
 
 while is_trading_day(date_yesterday) == False:
-    n = n + 1
-    date_yesterday = str(date_today - datetime.timedelta(days=n))
+    delta_today += 1
+    date_yesterday = str(date_today - datetime.timedelta(days=delta_today))
 
 # Setting up the Mail Module in Order to send an Email when the user creates an account.
 # Module Name = Flask Mail, Imports needed: Mail, Message
