@@ -6,12 +6,13 @@ from wtforms import StringField, PasswordField, SubmitField, EmailField # Fields
 from wtforms.validators import InputRequired, Length, ValidationError # Validators for What the Forms
 from flask_bcrypt import Bcrypt # Used to decrypt Passwords in the Database, is a security feature
 from flask_mail import Mail, Message # Flask Mail Support ==> Confirmation Mail for a new user
-import pyotp # For 2-Factor Authentication
-import datetime # Used for the API
-import requests # Used for the API
-import json # Used for the API
+import pyotp  # For 2-Factor Authentication
+import datetime  # Used for the API
+import requests  # Used for the API
+import json  # Used for the API
 import pandas as pd  # Pandas to read Data from Files
-from datetime import datetime as date
+import datetime # Used to Determine Yesterday's Date
+import holidays # Used to Determine whether yesterday is a federal holiday in the United States
 
 # Initialization of the Flask App and Setting up the Database for the registration Form as well as Bcrypt to encrypt Passwords
 # and the Flask Mail Module to send users a Welcome Message after a successful Sign-Up Process
@@ -23,20 +24,26 @@ db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 mail = Mail(app)
 
-# Yesterday's Date: Used to get the Stock Price from the Alphavantage API
-# Added an IF-Statement to determine whether today is Sunday or Monday to not break the API
+# Yesterday's Date Variable: Used to get the Stock Price from the Alphavantage API
+# Created the is_trading_day to determine whether yesterday is a trading.
+# If not: The while loop continues to expand the timedelta until a trading day is reached
+# Function: is_trading_day returns True in this case.
 
-today = date.today().strftime("%A")
-if today == "Sunday":
-    date_today = datetime.date.today()
-    date_yesterday = date_today - datetime.timedelta(days=2)
-elif today == "Monday":
-    date_today = datetime.date.today()
-    date_yesterday = date_today - datetime.timedelta(days=3)
-else:
-    date_today = datetime.date.today()
-    date_yesterday = date_today - datetime.timedelta(days=1)
+date_today = datetime.date.today()
+n = 1
+date_yesterday = str(date_today - datetime.timedelta(days=n))
 
+def is_trading_day(date_yesterday):
+    # Convert the input date to a datetime object
+    date = datetime.datetime.strptime(date_yesterday, '%Y-%m-%d')
+    # Create a holidays object for the specified country
+    hdays = holidays.US()
+    # Check if the day is a weekday and not a holiday
+    return date.isoweekday() in range(1, 6) and date not in hdays
+
+while is_trading_day(date_yesterday) == False:
+    n = n + 1
+    date_yesterday = str(date_today - datetime.timedelta(days=n))
 
 # Setting up the Mail Module in Order to send an Email when the user creates an account.
 # Module Name = Flask Mail, Imports needed: Mail, Message
