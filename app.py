@@ -22,6 +22,7 @@ app.config['SECRET_KEY'] = '2220_0390390_ajkölfja_1940'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 mail = Mail(app)
+
 # Yesterday's Date: Used to get the Stock Price from the Alphavantage API
 # Added an IF-Statement to determine whether today is Sunday or Monday to not break the API
 
@@ -159,8 +160,8 @@ def register():
         msg = Message("Welcome to Cross Border Finance", sender="chrise2012.mayer@gmail.com", recipients=[form.email.data])
         msg.body = "Thanks for creating your account. You can now fully experience the Cross Border Finance Website. " \
                    "Please see the attached PDF Guide for further information on the website."
-        with app.open_resource("msc1.pdf") as attachment:
-            msg.attach("msc1.pdf", "text/pdf", attachment.read())
+        with app.open_resource("User_Guide_Cross_Border_Finance.pdf") as attachment:
+            msg.attach("User_Guide_Cross_Border_Finance.pdf", "text/pdf", attachment.read())
         mail.send(msg)
         db.session.commit()
         return redirect(url_for('hello_world'))
