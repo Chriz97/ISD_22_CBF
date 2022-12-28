@@ -1,3 +1,6 @@
+ <!-- The first part of this html files loads the CSS file from the Statice Folder, imports
+ the Bootstrap Database and also creates the connection to the Pyscript website.
+ This has to be in order to be able to run Pyscript in the Browser -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +19,8 @@
 <header>
 <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
 <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+ <!-- Py-env is the HTML Tag to load modules from Python to Pyscript. These modules are loaded now and
+  have to be imported later-->
     <py-env>
     - matplotlib
     - numpy
@@ -30,7 +35,7 @@
         </a>
     </form>
     </div>
-
+ <!-- Block Content is used to insert the variables from the app.py file to the HTML Template -->
 {% block content %}
     <table>
     <tr>
@@ -73,6 +78,9 @@
     <h3 class="h3" style="color: white; text-align: center;">Value Model</h3>
     </form>
     </div>
+     <!-- The two graphs are displayed using Pyscript. The script first imports the matplotlib, numpy and aquarel
+      (which is used for styling graphs) then the graph is plotted, X and Y Axis get their respective labels.
+      Fig1 or just Fig is the Pyscript term to finally display the graph on the website-->
 <table>
     <td>
     <div id="matplotlib-lineplot" style="horiz-align: left;">

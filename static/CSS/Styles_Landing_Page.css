@@ -1,0 +1,13 @@
+html {
+    overflow: hidden;
+}
+
+body {
+    background-size: cover;
+    height: 1000px;
+    background-image: url("/static/landingpage.jpg");
+}
+
+.mask {
+    margin-top: 250px;
+}

@@ -1,0 +1,25 @@
+html {
+    overflow: hidden;
+}
+body{
+    background-image: url("/static/login_page_picture.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.login-form{
+    border-radius: 23px;
+    background-color: #fff;
+    padding: 30px;
+}
+h3{
+    color: white;
+    text-align: center;
+    margin-top: 240px;
+}
+h1{
+    color: white;
+}
+h2{
+    color: white;
+}

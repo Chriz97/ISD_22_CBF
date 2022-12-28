@@ -32,11 +32,11 @@ date_today = datetime.date.today()
 delta_today = 1
 date_yesterday = str(date_today - datetime.timedelta(days=delta_today))
 
-def is_trading_day(date_yesterday):
+def is_trading_day(date_yesterday, country="US"):
     # Convert the input date to a datetime object
     date = datetime.datetime.strptime(date_yesterday, '%Y-%m-%d')
     # Create a holidays object for the specified country
-    hdays = holidays.US()
+    hdays = holidays.country_holidays(country)
     # Check if the day is a weekday and not a holiday
     return date.isoweekday() in range(1, 6) and date not in hdays
 
@@ -223,7 +223,7 @@ list_stock_price = list(df["Stock_Price"])
 # the Stock Information from the Excel Database and Connect the API calls to the HTML Template
 
 @app.route("/MMM", methods=["GET"])
-#@login_required
+@login_required
 def MMM():
     url_Time_Series_MMM = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=MMM&apikey=B4UKNHORQ1AFHU68'
     r_MMM = requests.get(url_Time_Series_MMM)

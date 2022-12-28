@@ -1,37 +1,12 @@
+ <!-- The login page uses the Bootstrap Database for style. Then the CSS File is imported.
+ The login page uses the forms which are built with Flask Login-->
 <!DOCTYPE html>
 <html>
   <head>
     <title>Login Page</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
-    <style type="text/css">
-       html {
-      overflow: hidden;
-      }
-      body{
-      background-image: url("/static/login_page_picture.jpg");
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      }
-      .login-form{
-      border-radius: 23px;
-      background-color: #fff;
-      padding: 30px;
-
-      }
-      h3{
-      color: white;
-      text-align: center;
-      margin-top: 240px;
-      }
-      h1{
-          color: white;
-      }
-      h2{
-          color: white;
-      }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Styles_Login.css') }}">
   </head>
   <body>
        <div class="container">
