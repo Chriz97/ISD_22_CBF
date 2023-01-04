@@ -1,4 +1,4 @@
-
+/* Login and Registration Buttons */
 .wrapper {
    float:right;
    position: absolute;
@@ -6,6 +6,7 @@
    right: 0px;
    margin-right:0px;
 }
+/* Background Design */
 body {
   font-family: Arial, Verdana, sans-serif;
   background-image: url("/static/main_page_picture.jpg");
@@ -13,12 +14,13 @@ body {
   background-repeat: no-repeat;
   background-position: center;
 }
-
+/* Marquee (Moving Text)*/
 marquee {
     color: white;
     background-color: transparent;
 }
 
+/* Table Design */
 table {
     margin: auto;
     border-collapse: collapse;
@@ -48,7 +50,7 @@ table tbody tr:nth-of-type(odd) {
 th  {
     background-color: transparent;
 }
-
+/* Rounded corners - table */
 th:first-of-type {
   border-top-left-radius: 10px;
 }
@@ -62,30 +64,8 @@ tr:last-of-type td:last-of-type {
   border-bottom-right-radius: 10px;
 }
 
+/* Navigation Bar Positioning */
 .navbar-brand-center {
   margin-left: auto;
   margin-right: auto;
-}
-
-.btn-primary {
-    position: relative;
-    top: 15px;
-    right: 3px;
-}
-
-a {
-    color: black;
-}
-
-.box{
-  width: 100%;
-  text-align:center;
-}
-
-.header{
-    height: 100vh;
-}
-
-li {
-    alignment: right;
 }

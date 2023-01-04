@@ -1,13 +1,15 @@
+/* Disable Scrolling */
 html {
     overflow: hidden;
 }
 
+/* Background Design */
 body {
     background-size: cover;
     height: 1000px;
     background-image: url("/static/landingpage.jpg");
 }
-
+/* Black Shade Box Position */
 .mask {
     margin-top: 250px;
 }

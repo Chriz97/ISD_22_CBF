@@ -3,11 +3,13 @@
  This has to be in order to be able to run Pyscript in the Browser -->
 <!DOCTYPE html>
 <html lang="en">
+<!--Navigation Bar-->
 <head>
     <meta charset="UTF-8">
     <title>3M</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles_STOCKS.css') }}">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--Navigation Bar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-5-strong">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -28,6 +30,7 @@
     </py-env>
 </header>
 <body>
+<!--Company table header-->
     <div class="container">
     <form class="center-block" style="background-color: black;   max-width: 1400px; height: 70px">
         <br>
@@ -37,6 +40,7 @@
     </div>
  <!-- Block Content is used to insert the variables from the app.py file to the HTML Template -->
 {% block content %}
+    <!--Company information table-->
     <table>
     <tr>
     <td style="width: 50% ">Previous Close: {{data_API_MMM}}</td>
@@ -81,6 +85,8 @@
      <!-- The two graphs are displayed using Pyscript. The script first imports the matplotlib, numpy and aquarel
       (which is used for styling graphs) then the graph is plotted, X and Y Axis get their respective labels.
       Fig1 or just Fig is the Pyscript term to finally display the graph on the website-->
+
+<!--Second table for the graphs-->
 <table>
     <td>
     <div id="matplotlib-lineplot" style="horiz-align: left;">

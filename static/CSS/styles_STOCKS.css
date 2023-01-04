@@ -1,22 +1,11 @@
-body {
-  font-family: Arial, Verdana, sans-serif;
-  background-color: white;
-}
-
-h1 {
-  font-size: 1.8cm;
-  color: blue;
-  position: relative;
-  left: 10px;
-}
-
+/* Background Design */
 body {
   background-image: url("/static/main_page_picture.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
-
+/* Table Design */
 table {
     margin: auto;
     border-collapse: collapse;
@@ -63,12 +52,12 @@ table tr:last-child{
     background:black;
 }
 
-
 form{
     margin: auto;
     min-width: 1400px;
 
 }
+/* Navbar Layout */
 
 .navbar-brand-center {
   margin-left: auto;

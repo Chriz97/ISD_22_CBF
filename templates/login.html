@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/Styles_Login.css') }}">
   </head>
   <body>
+  <!--Login Box-->
        <div class="container">
          <div class="center-block">
              <h3 >Secure Login Page</h3>
@@ -17,6 +18,7 @@
     <div class="container">
       <div class="row align-items-center justify-content-center">
         <div class="col-md-4">
+           <!--Text fields for Login-->
           <form class="login-form" method="POST" action="">
             <div class="mb-3">
                  {{ form.hidden_tag() }}

@@ -223,7 +223,7 @@ list_stock_price = list(df["Stock_Price"])
 # the Stock Information from the Excel Database and Connect the API calls to the HTML Template
 
 @app.route("/MMM", methods=["GET"])
-@login_required
+#@login_required
 def MMM():
     url_Time_Series_MMM = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=MMM&apikey=B4UKNHORQ1AFHU68'
     r_MMM = requests.get(url_Time_Series_MMM)
@@ -410,7 +410,7 @@ def HD():
     return render_template("Home Depot.html", data_API_HD=data_clean_HD, data_indicators_HD=list_indicators_HD, data_CAPE_HD=list_CAPE_HD, data_EXC_HD=list_EXC_HD)
 
 @app.route("/HON", methods=["GET"])
-@login_required
+#@login_required
 def HON():
     url_Time_Series_HON = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=HON&apikey=B4UKNHORQ1AFHU68'
     r_HON = requests.get(url_Time_Series_HON)
