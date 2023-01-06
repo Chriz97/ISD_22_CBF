@@ -46,3 +46,31 @@ Home Page:
 - 2 Second Graph Inflation Adjusted EPS
 
 Value Model:
+
+The core idea of the Value Model is, that homogeneous goods should be traded for the same price on the
+market. As we don’t have several suppliers with different prices but rather a market, we can´t just simply
+take the average and either go long/short with underpriced/overpriced goods. Therefore, we make the
+historical prices “more comparable” to today’s prices by using the Shiller price-to-earnings ratio CAPE and
+look for a 10-year average of how the market valued the underlying security.
+The core assumption of a relational stock value model that uses the Shiller price-to-earnings ratio (CAPE)
+for measurement is that the market's long-term average price-to-earnings ratio is a good indicator of the
+market's overall valuation. 
+
+The Shiller CAPE is a measure of the market's price-to-earnings ratio that is
+based on average earnings over the past 10 years, adjusted for inflation. It is named after economist
+Robert Shiller, who developed the measure to account for fluctuations in earnings that can affect the
+traditional price-to-earnings ratio.
+
+According to the relational stock value model, if the Shiller CAPE is significantly above its long-term
+average, it may indicate that the market is overvalued and that future returns may be lower than average.
+Conversely, if the Shiller CAPE is significantly below its long-term average, it may indicate that the market
+is undervalued and that future returns may be higher than average.
+The relational stock value model assumes that the Shiller CAPE is a reliable indicator of the market's
+overall valuation because it considers long-term earnings trends and adjusts for inflation, which can help
+to smooth out short-term fluctuations in earnings and provide a more accurate measure of the market's
+valuation. However, it is important to note that the Shiller CAPE is just one factor to consider when
+evaluating the market and that other factors, such as economic conditions and company-specific
+fundamentals, can also influence stock prices.
+
+So basically, this approach is another source of information which ideally supports you in making easier
+decisions. 
