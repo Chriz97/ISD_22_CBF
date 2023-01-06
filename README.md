@@ -24,7 +24,7 @@ The Website:
 Registration:
 
  - SQLITE Database in the Instance Folder: To handle User information (First Name, Last Name, Username, Email, Password)
- - User receives an email when he registers on the Website (Google SMTP Server)
+ - User receives an email with the "User Guide" when he registers on the Website (Google SMTP Server)
 
 Login:
 
@@ -42,8 +42,7 @@ Home Page:
 - Behind "Paywall": Users have to register and login in order to see the Value Model
 	and the Financial Fundamentals (Flask Login: @LoginRequired)
 - Financial Fundamentals (Stock Price, 52 Week High, 52 Week Low, Beta and many more)
-- Graph that displays the Value Model (Created with Matplotlib and implemented with Pyscript)
-- 2 Second Graph Inflation Adjusted EPS
+- 2 Graphs (CAPE and Excess CAPE) that display the Value Model (Created with Matplotlib and implemented with Pyscript)
 
 Value Model:
 
