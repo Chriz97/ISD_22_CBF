@@ -18,7 +18,7 @@ import holidays # Used to Determine whether yesterday is a federal holiday in th
 
 app = Flask(__name__, static_url_path='/static')
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
-app.config['SECRET_KEY'] = '2220_0390390_ajkölfja_1940'
+app.config['SECRET_KEY'] = '' # Input your secret key
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 mail = Mail(app)
@@ -49,8 +49,8 @@ while is_trading_day(date_yesterday) == False:
 
 app.config["MAIL_SERVER"] = "smtp.gmail.com"
 app.config["MAIL_PORT"] = 465
-app.config["MAIL_USERNAME"] = "chrise2012.mayer@gmail.com"
-app.config["MAIL_PASSWORD"] = "kvhmvhpqedkittzp"
+app.config["MAIL_USERNAME"] = "" # Email username
+app.config["MAIL_PASSWORD"] = "" # Email passowrd
 app.config["MAIL_USE_TLS"] = False
 app.config["MAIL_USE_SSL"] = True
 mail = Mail(app)
@@ -225,7 +225,7 @@ list_stock_price = list(df["Stock_Price"])
 @app.route("/MMM", methods=["GET"])
 #@login_required
 def MMM():
-    url_Time_Series_MMM = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=MMM&apikey=B4UKNHORQ1AFHU68'
+    url_Time_Series_MMM = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=MMM&apikey=##'
     r_MMM = requests.get(url_Time_Series_MMM)
     data_MMM = r_MMM.content
     data_json_MMM = json.loads(data_MMM)
@@ -241,7 +241,7 @@ def MMM():
 @app.route("/AXP", methods=["GET"])
 @login_required
 def AXP():
-    url_Time_Series_AXP = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=MMM&apikey=B4UKNHORQ1AFHU68'
+    url_Time_Series_AXP = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=MMM&apikey=##'
     r_AXP = requests.get(url_Time_Series_AXP)
     data_AXP = r_AXP.content
     data_json_AXP = json.loads(data_AXP)
@@ -272,7 +272,7 @@ def AMGN():
 
 @app.route("/AAPL", methods=["GET"])
 def AAPL():
-    url_Time_Series_AAPL = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=AAPL&apikey=B4UKNHORQ1AFHU68'
+    url_Time_Series_AAPL = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=AAPL&apikey=##'
     r_AAPL= requests.get(url_Time_Series_AAPL)
     data_AAPL = r_AAPL.content
     data_json_AAPL = json.loads(data_AAPL)
@@ -288,7 +288,7 @@ def AAPL():
 @app.route("/BA", methods=["GET"])
 @login_required
 def BA():
-    url_Time_Series_BA = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=BA&apikey=B4UKNHORQ1AFHU68'
+    url_Time_Series_BA = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=BA&apikey=##'
     r_BA = requests.get(url_Time_Series_BA)
     data_BA = r_BA.content
     data_json_BA = json.loads(data_BA)
@@ -304,7 +304,7 @@ def BA():
 @app.route("/CAT", methods=["GET"])
 @login_required
 def CAT():
-    url_Time_Series_CAT = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=CAT&apikey=B4UKNHORQ1AFHU68'
+    url_Time_Series_CAT = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=CAT&apikey=##'
     r_CAT = requests.get(url_Time_Series_CAT)
     data_CAT = r_CAT.content
     data_json_CAT = json.loads(data_CAT)
@@ -320,7 +320,7 @@ def CAT():
 @app.route("/CVX", methods=["GET"])
 @login_required
 def CVX():
-    url_Time_Series_CVX = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=CVX&apikey=B4UKNHORQ1AFHU68'
+    url_Time_Series_CVX = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=CVX&apikey=##'
     r_CVX = requests.get(url_Time_Series_CVX)
     data_CVX = r_CVX.content
     data_json_CVX = json.loads(data_CVX)
@@ -336,7 +336,7 @@ def CVX():
 @app.route("/CSCO", methods=["GET"])
 @login_required
 def CSCO():
-    url_Time_Series_CSCO = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=CSCO&apikey=B4UKNHORQ1AFHU68'
+    url_Time_Series_CSCO = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=CSCO&apikey=##'
     r_CSCO = requests.get(url_Time_Series_CSCO)
     data_CSCO = r_CSCO.content
     data_json_CSCO = json.loads(data_CSCO)
@@ -352,7 +352,7 @@ def CSCO():
 @app.route("/KO", methods=["GET"])
 @login_required
 def KO():
-    url_Time_Series_KO = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=KO&apikey=B4UKNHORQ1AFHU68'
+    url_Time_Series_KO = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=KO&apikey=##'
     r_KO= requests.get(url_Time_Series_KO)
     data_KO = r_KO.content
     data_json_KO = json.loads(data_KO)
@@ -368,7 +368,7 @@ def KO():
 @app.route("/DOW", methods=["GET"])
 @login_required
 def DOW():
-    url_Time_Series_DOW = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=DOW&apikey=B4UKNHORQ1AFHU68'
+    url_Time_Series_DOW = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=DOW&apikey=##'
     r_DOW = requests.get(url_Time_Series_DOW)
     data_DOW = r_DOW.content
     data_json_DOW = json.loads(data_DOW)
@@ -382,7 +382,7 @@ def DOW():
 @app.route("/GS", methods=["GET"])
 @login_required
 def GS():
-    url_Time_Series_GS = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=GS&apikey=B4UKNHORQ1AFHU68'
+    url_Time_Series_GS = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=GS&apikey=##'
     r_GS = requests.get(url_Time_Series_GS)
     data_GS = r_GS.content
     data_json_GS = json.loads(data_GS)
@@ -396,7 +396,7 @@ def GS():
 @app.route("/HD", methods=["GET"])
 @login_required
 def HD():
-    url_Time_Series_HD = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=HD&apikey=B4UKNHORQ1AFHU68'
+    url_Time_Series_HD = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=HD&apikey=##'
     r_HD = requests.get(url_Time_Series_HD)
     data_HD = r_HD.content
     data_json_HD = json.loads(data_HD)
@@ -412,7 +412,7 @@ def HD():
 @app.route("/HON", methods=["GET"])
 #@login_required
 def HON():
-    url_Time_Series_HON = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=HON&apikey=B4UKNHORQ1AFHU68'
+    url_Time_Series_HON = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=HON&apikey=##'
     r_HON = requests.get(url_Time_Series_HON)
     data_HON = r_HON.content
     data_json_HON = json.loads(data_HON)
@@ -428,7 +428,7 @@ def HON():
 @app.route("/INTC", methods=["GET"])
 @login_required
 def INTC():
-    url_Time_Series_INTC = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=INTC&apikey=B4UKNHORQ1AFHU68'
+    url_Time_Series_INTC = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=INTC&apikey=##'
     r_INTC = requests.get(url_Time_Series_INTC)
     data_INTC = r_INTC.content
     data_json_INTC = json.loads(data_INTC)
@@ -444,7 +444,7 @@ def INTC():
 @app.route("/IBM", methods=["GET"])
 @login_required
 def IBM():
-    url_Time_Series_IBM = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=IBM&apikey=B4UKNHORQ1AFHU68'
+    url_Time_Series_IBM = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=IBM&apikey=##'
     r_IBM = requests.get(url_Time_Series_IBM)
     data_IBM = r_IBM.content
     data_json_IBM = json.loads(data_IBM)
@@ -460,7 +460,7 @@ def IBM():
 @app.route("/JNJ", methods=["GET"])
 @login_required
 def JNJ():
-    url_Time_Series_JNJ = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=JNJ&apikey=B4UKNHORQ1AFHU68'
+    url_Time_Series_JNJ = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=JNJ&apikey=##'
     r_JNJ = requests.get(url_Time_Series_JNJ)
     data_JNJ = r_JNJ.content
     data_json_JNJ = json.loads(data_JNJ)
@@ -476,7 +476,7 @@ def JNJ():
 @app.route("/JPM", methods=["GET"])
 @login_required
 def JPM():
-    url_Time_Series_JPM = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=JPM&apikey=B4UKNHORQ1AFHU68'
+    url_Time_Series_JPM = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=JPM&apikey=##'
     r_JPM = requests.get(url_Time_Series_JPM)
     data_JPM = r_JPM.content
     data_json_JPM = json.loads(data_JPM)
@@ -492,7 +492,7 @@ def JPM():
 @app.route("/MCD", methods=["GET"])
 @login_required
 def MCD():
-    url_Time_Series_MCD = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=MCD&apikey=B4UKNHORQ1AFHU68'
+    url_Time_Series_MCD = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=MCD&apikey=##'
     r_MCD = requests.get(url_Time_Series_MCD)
     data_MCD = r_MCD.content
     data_json_MCD = json.loads(data_MCD)
@@ -508,7 +508,7 @@ def MCD():
 @app.route("/MRK", methods=["GET"])
 @login_required
 def MRK():
-    url_Time_Series_MRK = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=MRK&apikey=B4UKNHORQ1AFHU68'
+    url_Time_Series_MRK = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=MRK&apikey=##'
     r_MRK = requests.get(url_Time_Series_MRK)
     data_MRK = r_MRK.content
     data_json_MRK = json.loads(data_MRK)
@@ -525,7 +525,7 @@ def MRK():
 @app.route("/MSFT", methods=["GET"])
 @login_required
 def MSFT():
-    url_Time_Series_MSFT = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=MSFT&apikey=B4UKNHORQ1AFHU68'
+    url_Time_Series_MSFT = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=MSFT&apikey=##'
     r_MSFT = requests.get(url_Time_Series_MSFT)
     data_MSFT = r_MSFT.content
     data_json_MSFT = json.loads(data_MSFT)
@@ -541,7 +541,7 @@ def MSFT():
 @app.route("/NKE", methods=["GET"])
 @login_required
 def NKE():
-    url_Time_Series_NKE = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=NKE&apikey=B4UKNHORQ1AFHU68'
+    url_Time_Series_NKE = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=NKE&apikey=##'
     r_NKE = requests.get(url_Time_Series_NKE)
     data_NKE = r_NKE.content
     data_json_NKE = json.loads(data_NKE)
@@ -557,7 +557,7 @@ def NKE():
 @app.route("/PG", methods=["GET"])
 @login_required
 def PG():
-    url_Time_Series_PG = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=PG&apikey=B4UKNHORQ1AFHU68'
+    url_Time_Series_PG = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=PG&apikey=##'
     r_PG = requests.get(url_Time_Series_PG)
     data_PG = r_PG.content
     data_json_PG = json.loads(data_PG)
@@ -573,7 +573,7 @@ def PG():
 @app.route("/CRM", methods=["GET"])
 @login_required
 def CRM():
-    url_Time_Series_CRM = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=CRM&apikey=B4UKNHORQ1AFHU68'
+    url_Time_Series_CRM = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=CRM&apikey=##'
     r_CRM = requests.get(url_Time_Series_CRM)
     data_CRM = r_CRM.content
     data_json_CRM = json.loads(data_CRM)
@@ -587,7 +587,7 @@ def CRM():
 @app.route("/TRV", methods=["GET"])
 @login_required
 def TRV():
-    url_Time_Series_TRV = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=TRV&apikey=B4UKNHORQ1AFHU68'
+    url_Time_Series_TRV = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=TRV&apikey=##'
     r_TRV = requests.get(url_Time_Series_TRV)
     data_TRV = r_TRV.content
     data_json_TRV = json.loads(data_TRV)
@@ -603,7 +603,7 @@ def TRV():
 @app.route("/UNH", methods=["GET"])
 @login_required
 def UNH():
-    url_Time_Series_UNH = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=UNH&apikey=B4UKNHORQ1AFHU68'
+    url_Time_Series_UNH = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=UNH&apikey=##'
     r_UNH = requests.get(url_Time_Series_UNH)
     data_UNH = r_UNH.content
     data_json_UNH = json.loads(data_UNH)
@@ -619,7 +619,7 @@ def UNH():
 @app.route("/VZ", methods=["GET"])
 @login_required
 def VZ():
-    url_Time_Series_VZ = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=VZ&apikey=B4UKNHORQ1AFHU68'
+    url_Time_Series_VZ = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=VZ&apikey=##'
     r_VZ = requests.get(url_Time_Series_VZ)
     data_VZ = r_VZ.content
     data_json_VZ = json.loads(data_VZ)
@@ -635,7 +635,7 @@ def VZ():
 @app.route("/V", methods=["GET"])
 @login_required
 def V():
-    url_Time_Series_V = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=V&apikey=B4UKNHORQ1AFHU68'
+    url_Time_Series_V = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=V&apikey=##'
     r_V = requests.get(url_Time_Series_V)
     data_V = r_V.content
     data_json_V = json.loads(data_V)
@@ -649,7 +649,7 @@ def V():
 @app.route("/WBA", methods=["GET"])
 @login_required
 def WBA():
-    url_Time_Series_WBA = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=WBA&apikey=B4UKNHORQ1AFHU68'
+    url_Time_Series_WBA = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=WBA&apikey=##'
     r_WBA = requests.get(url_Time_Series_WBA)
     data_WBA = r_WBA.content
     data_json_WBA = json.loads(data_WBA)
@@ -665,7 +665,7 @@ def WBA():
 @app.route("/WMT", methods=["GET"])
 @login_required
 def WMT():
-    url_Time_Series_WMT = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=WMT&apikey=B4UKNHORQ1AFHU68'
+    url_Time_Series_WMT = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=WMT&apikey=##'
     r_WMT = requests.get(url_Time_Series_WMT)
     data_WMT = r_WMT.content
     data_json_WMT = json.loads(data_WMT)
@@ -681,7 +681,7 @@ def WMT():
 @app.route("/DIS", methods=["GET"])
 @login_required
 def DIS():
-    url_Time_Series_DIS = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=DIS&apikey=B4UKNHORQ1AFHU68'
+    url_Time_Series_DIS = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=DIS&apikey=##'
     r_DIS = requests.get(url_Time_Series_DIS)
     data_DIS = r_DIS.content
     data_json_DIS = json.loads(data_DIS)
